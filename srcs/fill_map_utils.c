@@ -12,11 +12,11 @@
 
 #include "../includes/cub3d.h"
 
-char	*ft_substr_cub3d(char *s, int start, int index, char *str)
+char	*ft_substr_cub3d(char *s, int start, int idx, char *str)
 {
-	if (s[start + index] && ft_is_whitespaces(s[start + index]))
-		return (ft_substr_cub3d(s, start, index + 1, str));
-	else if (!s[start + index])
+	if (s[start + idx] && ft_is_whitespaces(s[start + idx]))
+		return (ft_substr_cub3d(s, start, idx + 1, str));
+	else if (!s[start + idx])
 	{
 		if (str)
 			return (str);
@@ -26,7 +26,6 @@ char	*ft_substr_cub3d(char *s, int start, int index, char *str)
 	{
 		if (str)
 			return (str);
-		return (ft_substr(s, start + index, ft_strlen(s) - (size_t)(start
-					+ index)));
+		return (ft_substr(s, start + idx, ft_strlen(s) - (start + idx)));
 	}
 }
