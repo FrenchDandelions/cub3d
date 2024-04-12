@@ -25,9 +25,10 @@ static int	size_map(t_cub *cub, char **map, int i)
 	return (size_map(cub, map, i + 1));
 }
 
-static void	print_error_exit(char *s)
+static void	print_error_exit(char *s, t_cub *cub)
 {
 	ft_dprintf(STDERR_FILENO, "%s\n", s);
+	free_all(cub);
 	exit(2);
 }
 
@@ -61,7 +62,7 @@ static int	get_map(int fd, char **str, int *status, t_cub *cub)
 	{
 		if (line && ft_strcmp(line, "\n") == 0 && (!is_texture(cub->past_string)
 				&& ft_strcmp(cub->past_string, "\n")))
-			return (*status = 1, ft_memdel(cub->past_string), ft_memdel(line),
+			return (*status = 2, ft_memdel(cub->past_string), ft_memdel(line),
 				SUCCESS);
 		ft_memdel(cub->past_string);
 		cub->past_string = line;
@@ -70,7 +71,7 @@ static int	get_map(int fd, char **str, int *status, t_cub *cub)
 		return (close(fd), SUCCESS);
 	if (!(*str))
 		*str = ft_strdup(line);
-	else
+	else if (ft_strcmp(line, "\n"))
 		*str = ft_cub_join(*str, line);
 	if (!(*str))
 		return (ft_memdel(line), ERR_MALLOC);
@@ -87,19 +88,19 @@ int	create_map(char *map_name, t_cub *cub)
 	status = 0;
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-		print_error_exit("Error, couldn't open the map");
+		print_error_exit("Error, couldn't open the map", cub);
 	str = NULL;
 	if (get_map(fd, &str, &status, cub) != SUCCESS)
 		return (ft_memdel(str), ERR_MALLOC);
-	if (status == 1)
-		return (ft_memdel(str), SUCCESS);
+	if (status == 2)
+		return (ft_memdel(str), print_error_exit(MAP_ERR, cub), 2);
 	map = ft_split(str, '\n');
+	cub->initial_map = map;
 	if (!map)
 		return (ft_memdel(str), ERR_MALLOC);
 	for (int i = 0; map[i]; i++)
 		printf("Coucou : %s\n", map[i]);
 	if (size_map(cub, map, 0) == ERR_MALLOC)
 		return (ft_free_tab(map), ERR_MALLOC);
-	cub->initial_map = map;
 	return (free(str), fill_struct(cub, map, 0, 0));
 }

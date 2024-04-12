@@ -17,6 +17,7 @@
 
 # define SUCCESS 7
 # define ERR_MALLOC -2
+# define MAP_ERR "Error, the map isn't properly formatted"
 
 typedef struct s_cub
 {
@@ -29,7 +30,6 @@ typedef struct s_cub
 	char	*east_texture;
 	char	*floor_color;
 	char	*sky_color;
-	int		flag_double;
 }			t_cub;
 
 int			create_map(char *map_name, t_cub *cub);
@@ -37,5 +37,7 @@ bool		check_name_map(char *s);
 int			fill_struct(t_cub *cub, char **map, int i, int j);
 char		*ft_substr_cub3d(char *s, int start, int index, char *str);
 int			is_texture(char *s);
+void		print_map(t_cub *cub);
+void		free_all(t_cub *cub);
 
 #endif

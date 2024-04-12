@@ -12,13 +12,6 @@
 
 #include "../includes/cub3d.h"
 
-static size_t	ft_strlen_epur_end(char *s, int start)
-{
-	if (!s[start] || ft_is_whitespaces(s[start]))
-		return ((size_t)start);
-	return (ft_strlen_epur_end(s, start + 1));
-}
-
 char	*ft_substr_cub3d(char *s, int start, int index, char *str)
 {
 	if (s[start + index] && ft_is_whitespaces(s[start + index]))
@@ -33,7 +26,7 @@ char	*ft_substr_cub3d(char *s, int start, int index, char *str)
 	{
 		if (str)
 			return (str);
-		return (ft_substr(s, start + index, ft_strlen_epur_end(s, start + index)
-				- (size_t)(start + index)));
+		return (ft_substr(s, start + index, ft_strlen(s) - (size_t)(start
+					+ index)));
 	}
 }
