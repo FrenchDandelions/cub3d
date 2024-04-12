@@ -68,7 +68,7 @@ static int	get_map(int fd, char **str, int *status, t_cub *cub)
 		cub->past_string = line;
 	}
 	if (!line)
-		return (close(fd), SUCCESS);
+		return (SUCCESS);
 	if (!(*str))
 		*str = ft_strdup(line);
 	else if (ft_strcmp(line, "\n"))
@@ -91,7 +91,8 @@ int	create_map(char *map_name, t_cub *cub)
 		print_error_exit("Error, couldn't open the map", cub);
 	str = NULL;
 	if (get_map(fd, &str, &status, cub) != SUCCESS)
-		return (ft_memdel(str), ERR_MALLOC);
+		return (ft_memdel(str), close(fd), ERR_MALLOC);
+	close(fd);
 	if (status == 2)
 		return (ft_memdel(str), print_error_exit(MAP_ERR, cub), 2);
 	map = ft_split(str, '\n');
