@@ -16,17 +16,17 @@ static int	check_struct(t_cub *cub, int mode)
 {
 	if (mode == 0)
 	{
-		if (!cub->north_texture || !cub->south_texture || !cub->west_texture
-			|| !cub->east_texture || !cub->floor_color || !cub->sky_color
-			|| !cub->map[0])
+		if (!cub->img.north_texture || !cub->img.south_texture
+			|| !cub->img.west_texture || !cub->img.east_texture
+			|| !cub->img.floor_color || !cub->img.sky_color || !cub->img.map[0])
 			return (0);
 		return (1);
 	}
 	else
 	{
-		if (cub->north_texture && cub->south_texture && cub->west_texture
-			&& cub->east_texture && cub->floor_color && cub->sky_color
-			&& cub->map[0])
+		if (cub->img.north_texture && cub->img.south_texture
+			&& cub->img.west_texture && cub->img.east_texture
+			&& cub->img.floor_color && cub->img.sky_color && cub->img.map[0])
 			return (1);
 		else
 			return (0);
@@ -51,36 +51,36 @@ static int	checker(char **cub_str, int size, char *s)
 
 static int	fill_texture(char *s, t_cub *cub)
 {
-	if (cub->map[0])
+	if (cub->img.map[0])
 		return (2);
 	if (ft_strncmp(s, "NO", 2) == 0)
-		return (checker(&cub->north_texture, 2, s));
+		return (checker(&cub->img.north_texture, 2, s));
 	else if (ft_strncmp(s, "SO", 2) == 0)
-		return (checker(&cub->south_texture, 2, s));
+		return (checker(&cub->img.south_texture, 2, s));
 	else if (ft_strncmp(s, "WE", 2) == 0)
-		return (checker(&cub->west_texture, 2, s));
+		return (checker(&cub->img.west_texture, 2, s));
 	else if (ft_strncmp(s, "EA", 2) == 0)
-		return (checker(&cub->east_texture, 2, s));
+		return (checker(&cub->img.east_texture, 2, s));
 	else if (ft_strncmp(s, "F", 1) == 0)
-		return (checker(&cub->floor_color, 1, s));
+		return (checker(&cub->img.floor_color, 1, s));
 	else if (ft_strncmp(s, "C", 1) == 0)
-		return (checker(&cub->sky_color, 1, s));
+		return (checker(&cub->img.sky_color, 1, s));
 	return (2);
 }
 
 int	is_texture(char *s)
 {
-	if (ft_strncmp(s, "NO", 2) == 0 && s[2] == ' ')
+	if (ft_strncmp(s, "NO ", 3) == 0)
 		return (1);
-	else if (ft_strncmp(s, "SO", 2) == 0 && s[2] == ' ')
+	else if (ft_strncmp(s, "SO ", 3) == 0)
 		return (1);
-	else if (ft_strncmp(s, "WE", 2) == 0 && s[2] == ' ')
+	else if (ft_strncmp(s, "WE ", 3) == 0)
 		return (1);
-	else if (ft_strncmp(s, "EA", 2) == 0 && s[2] == ' ')
+	else if (ft_strncmp(s, "EA ", 3) == 0)
 		return (1);
-	else if (ft_strncmp(s, "F", 1) == 0 && s[1] == ' ')
+	else if (ft_strncmp(s, "F ", 2) == 0)
 		return (1);
-	else if (ft_strncmp(s, "C", 1) == 0 && s[1] == ' ')
+	else if (ft_strncmp(s, "C ", 2) == 0)
 		return (1);
 	return (0);
 }
@@ -105,8 +105,9 @@ int	fill_struct(t_cub *cub, char **map, int i, int j)
 	}
 	else
 	{
-		cub->map[j] = map[i];
-		return (cub->map[j + 1] = NULL, fill_struct(cub, map, i + 1, j + 1));
+		cub->img.map[j] = map[i];
+		return (cub->img.map[j + 1] = NULL, fill_struct(cub, map, i + 1, j
+				+ 1));
 	}
 	return (fill_struct(cub, map, i + 1, j));
 }

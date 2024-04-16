@@ -30,6 +30,7 @@
 # define CONTINUE 100
 
 char				**ft_split(char const *s, char c);
+char				**ft_dup_array(char **array, int size);
 void				*ft_memset(void *s, int c, size_t n);
 void				*ft_memcpy(void *dest, const void *src, size_t n);
 void				*ft_memmove(void *dest, const void *src, size_t n);

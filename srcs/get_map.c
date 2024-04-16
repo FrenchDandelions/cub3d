@@ -16,10 +16,11 @@ static int	size_map(t_cub *cub, char **map, int i)
 {
 	if (!map[i])
 	{
-		cub->map = malloc(sizeof(char *) * (i + 1));
-		if (!cub->map)
+		cub->img.map = malloc(sizeof(char *) * (i + 1));
+		cub->img.size_map = i + 1;
+		if (!cub->img.map)
 			return (ERR_MALLOC);
-		cub->map[0] = NULL;
+		cub->img.map[0] = NULL;
 		return (SUCCESS);
 	}
 	return (size_map(cub, map, i + 1));
@@ -88,7 +89,7 @@ int	create_map(char *map_name, t_cub *cub)
 	status = 0;
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-		print_error_exit("Error, couldn't open the map", cub);
+		print_error_exit("Error\nCouldn't open the map", cub);
 	str = NULL;
 	if (get_map(fd, &str, &status, cub) != SUCCESS)
 		return (ft_memdel(str), close(fd), ERR_MALLOC);
@@ -99,8 +100,6 @@ int	create_map(char *map_name, t_cub *cub)
 	cub->initial_map = map;
 	if (!map)
 		return (ft_memdel(str), ERR_MALLOC);
-	for (int i = 0; map[i]; i++)
-		printf("Coucou : %s\n", map[i]);
 	if (size_map(cub, map, 0) == ERR_MALLOC)
 		return (ft_free_tab(map), ERR_MALLOC);
 	return (free(str), fill_struct(cub, map, 0, 0));

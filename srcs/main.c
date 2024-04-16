@@ -14,40 +14,58 @@
 
 static void	initialize_struct(t_cub *cub)
 {
-	cub->map = NULL;
+	cub->img.map = NULL;
 	cub->initial_map = NULL;
 	cub->past_string = NULL;
-	cub->north_texture = NULL;
-	cub->south_texture = NULL;
-	cub->west_texture = NULL;
-	cub->east_texture = NULL;
-	cub->floor_color = NULL;
-	cub->sky_color = NULL;
+	cub->img.north_texture = NULL;
+	cub->img.south_texture = NULL;
+	cub->img.west_texture = NULL;
+	cub->img.east_texture = NULL;
+	cub->img.floor_color = NULL;
+	cub->img.sky_color = NULL;
+	cub->img.north = NULL;
+	cub->img.south = NULL;
+	cub->img.west = NULL;
+	cub->img.east = NULL;
+	cub->img.width = 64;
+	cub->img.height = 64;
+	cub->img.size_map = 0;
+	cub->pos.orientation = '\0';
+	cub->pos.start_x = -1;
+	cub->pos.start_y = -1;
 }
 
 void	print_map(t_cub *cub)
 {
-	printf("NO :%s\n", cub->north_texture);
-	printf("SO :%s\n", cub->south_texture);
-	printf("WE :%s\n", cub->west_texture);
-	printf("EA :%s\n", cub->east_texture);
-	printf("F :%s\n", cub->floor_color);
-	printf("C :%s\n", cub->sky_color);
-	if (cub->map)
-		for (int i = 0; cub->map[i]; i++)
-			printf("%s\n", cub->map[i]);
+	printf("NO :%s\n", cub->img.north_texture);
+	printf("SO :%s\n", cub->img.south_texture);
+	printf("WE :%s\n", cub->img.west_texture);
+	printf("EA :%s\n", cub->img.east_texture);
+	printf("F :%s\n", cub->img.floor_color);
+	printf("C :%s\n", cub->img.sky_color);
+	if (cub->img.map)
+		for (int i = 0; cub->img.map[i]; i++)
+			printf("%s\n", cub->img.map[i]);
+	printf("Pos x: %d, Pos y : %d\n", cub->pos.start_x, cub->pos.start_y);
+	if (cub->pos.start_x != -1)
+		printf("Char postion : %c\n",
+			cub->img.map[cub->pos.start_x][cub->pos.start_y]);
 }
 
 void	free_all(t_cub *cub)
 {
-	ft_memdel(cub->north_texture);
-	ft_memdel(cub->south_texture);
-	ft_memdel(cub->east_texture);
-	ft_memdel(cub->west_texture);
-	ft_memdel(cub->floor_color);
-	ft_memdel(cub->sky_color);
+	ft_memdel(cub->img.north_texture);
+	ft_memdel(cub->img.south_texture);
+	ft_memdel(cub->img.east_texture);
+	ft_memdel(cub->img.west_texture);
+	ft_memdel(cub->img.floor_color);
+	ft_memdel(cub->img.sky_color);
+	ft_memdel(cub->img.north);
+	ft_memdel(cub->img.south);
+	ft_memdel(cub->img.west);
+	ft_memdel(cub->img.east);
 	ft_free_tab(cub->initial_map);
-	free(cub->map);
+	ft_memdel(cub->img.map);
 }
 
 void	print_and_free_struct(t_cub *cub)
@@ -56,23 +74,44 @@ void	print_and_free_struct(t_cub *cub)
 	free_all(cub);
 }
 
+void	print_err(int err)
+{
+	if (err == 2)
+		ft_dprintf(STDERR_FILENO, "%s\n", MAP_ERR);
+	if (err == ERR_MALLOC)
+		ft_dprintf(STDERR_FILENO, "Error\nMalloc\n");
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
 	int		status;
 
+	// char	**new_map;
 	initialize_struct(&cub);
 	if (argc == 2)
 	{
 		if (!check_name_map(argv[1]))
-			return (ft_dprintf(STDERR_FILENO, "Wrong file name\n"), 2);
+			return (ft_dprintf(STDERR_FILENO, "Error\nWrong file name\n"), 2);
 		status = create_map(argv[1], &cub);
-		printf("Here : %d\n", status);
 		if (status != SUCCESS && status != 0)
-			return (free_all(&cub), status);
-		print_and_free_struct(&cub);
+			return (print_err(status), free_all(&cub), status);
+		print_map(&cub);
+		status = check_elements(&cub);
+		if (status != SUCCESS)
+			return (print_err(status), free_all(&cub), status);
+		print_map(&cub);
+		// new_map = ft_dup_array(cub.img.map, cub.img.size_map);
+		// for (int i = 0; new_map[i]; i++)
+		// 	printf("Here: %s, %zu, %zu\n", new_map[i], ft_strlen(new_map[i]),
+		// 		strlen(new_map[i]));
+		status = check_access(ft_dup_array(cub.img.map, cub.img.size_map),
+				cub.pos.start_x, cub.pos.start_y, cub.img.size_map);
+		if (status != SUCCESS)
+			return (print_err(status), free_all(&cub), status);
+		free_all(&cub);
 		return (0);
 	}
 	else
-		return (ft_dprintf(STDERR_FILENO, "Error, wrong argument count\n"), 2);
+		return (ft_dprintf(STDERR_FILENO, "Error\nWrong argument count\n"), 2);
 }

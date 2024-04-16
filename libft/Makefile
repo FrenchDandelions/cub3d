@@ -4,6 +4,7 @@ SRC_FILES = ft_atoi.c \
 			ft_atoll.c \
 	    	ft_bzero.c \
 			ft_calloc.c \
+			ft_dup_array.c \
 			ft_free_tab.c \
 			ft_is_whitespaces.c \
 	    	ft_isalnum.c \
@@ -73,19 +74,19 @@ SRC_FILES = ft_atoi.c \
 			./gnl/get_next_line_utils.c \
 			./gnl/get_next_line.c \
 
-OBJECTS = $(patsubst %.c, %.o, $(SRC_FILES))
+OBJECTS = $(SRC_FILES:.c=.o)
 INCLUDE = libft.h ./sprintf/sprintf.h ./printf/ft_printf.h ./dprintf/ft_dprintf.h ./gnl/get_next_line.h
 CC = cc
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 
 all: $(NAME)
 
-$(NAME): $(OBJECTS) $(INCLUDE)
+$(NAME): $(OBJECTS) $(INCLUDE) Makefile
 		ar rcs $(NAME) $(OBJECTS)
 
 
 %.o: %.c $(INCLUDE)
-		$(CC) $(FLAGS) -I ./ -c $< -o $@
+		$(CC) $(CFLAGS) -I ./ -c $< -o $@
 
 clean:
 	rm -f $(OBJECTS) $(BONUS_OBJECTS)

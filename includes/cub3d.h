@@ -14,15 +14,20 @@
 # define CUB3D_H
 
 # include "../libft/libft.h"
+# include "../minilibx-linux/mlx.h"
 
 # define SUCCESS 7
+# define FAILURE 0
 # define ERR_MALLOC -2
-# define MAP_ERR "Error, the map isn't properly formatted"
+# define ERR_PARSING 2
+# define MAP_ERR "Error\nThe map isn't properly formatted"
 
-typedef struct s_cub
+typedef struct s_img
 {
-	char	**initial_map;
-	char	*past_string;
+	void	*north;
+	void	*south;
+	void	*west;
+	void	*east;
 	char	**map;
 	char	*north_texture;
 	char	*south_texture;
@@ -30,6 +35,35 @@ typedef struct s_cub
 	char	*east_texture;
 	char	*floor_color;
 	char	*sky_color;
+	int		width;
+	int		height;
+	int		size_map;
+}			t_img;
+
+/*
+p = map[y][x];
+
+.............x......
+....................
+y............p......
+....................
+*/
+
+typedef struct s_pos
+{
+	char	orientation;
+	int		start_x;
+	int		start_y;
+}			t_pos;
+
+typedef struct s_cub
+{
+	char	**initial_map;
+	char	*past_string;
+	void	*mlx_ptr;
+	void	*mlx_win;
+	t_img	img;
+	t_pos	pos;
 }			t_cub;
 
 int			create_map(char *map_name, t_cub *cub);
@@ -39,5 +73,7 @@ char		*ft_substr_cub3d(char *s, int start, int index, char *str);
 int			is_texture(char *s);
 void		print_map(t_cub *cub);
 void		free_all(t_cub *cub);
+int			check_elements(t_cub *cub);
+int			check_access(char **map, int x, int y, int size_map);
 
 #endif
