@@ -30,6 +30,7 @@ static void	initialize_struct(t_cub *cub)
 	cub->img.width = 64;
 	cub->img.height = 64;
 	cub->img.size_map = 0;
+	cub->size_list = 0;
 	cub->pos.orientation = '\0';
 	cub->pos.start_x = -1;
 	cub->pos.start_y = -1;
@@ -64,8 +65,9 @@ void	free_all(t_cub *cub)
 	ft_memdel(cub->img.south);
 	ft_memdel(cub->img.west);
 	ft_memdel(cub->img.east);
-	ft_free_tab(cub->initial_map);
+	ft_memdel(cub->initial_map);
 	ft_memdel(cub->img.map);
+	ft_delete_list(&cub->map);
 }
 
 void	print_and_free_struct(t_cub *cub)
@@ -82,6 +84,18 @@ void	print_err(int err)
 		ft_dprintf(STDERR_FILENO, "Error\nMalloc\n");
 }
 
+void	print_map_list(t_cub *cub)
+{
+	t_map	*copy;
+
+	copy = cub->map;
+	while (copy)
+	{
+		printf("Coucou : %s\n", copy->line);
+		copy = copy->next;
+	}
+}
+
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
@@ -93,22 +107,17 @@ int	main(int argc, char **argv)
 	{
 		if (!check_name_map(argv[1]))
 			return (ft_dprintf(STDERR_FILENO, "Error\nWrong file name\n"), 2);
-		status = create_map(argv[1], &cub);
+		status = create_map_list(argv[1], &cub);
 		if (status != SUCCESS && status != 0)
 			return (print_err(status), free_all(&cub), status);
-		print_map(&cub);
+		print_map_list(&cub);
 		status = check_elements(&cub);
 		if (status != SUCCESS)
 			return (print_err(status), free_all(&cub), status);
-		print_map(&cub);
-		// new_map = ft_dup_array(cub.img.map, cub.img.size_map);
-		// for (int i = 0; new_map[i]; i++)
-		// 	printf("Here: %s, %zu, %zu\n", new_map[i], ft_strlen(new_map[i]),
-		// 		strlen(new_map[i]));
-		status = check_access(ft_dup_array(cub.img.map, cub.img.size_map),
-				cub.pos.start_x, cub.pos.start_y, cub.img.size_map);
+		status = check_access(cub.img.map, cub.img.size_map, 0);
 		if (status != SUCCESS)
-			return (print_err(status), free_all(&cub), status);
+			return (print_err(2), free_all(&cub), status);
+		print_map(&cub);
 		free_all(&cub);
 		return (0);
 	}

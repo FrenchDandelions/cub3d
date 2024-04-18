@@ -12,47 +12,34 @@
 
 #include "../includes/cub3d.h"
 
-static int	recusivity(char **map, int x, int y, int size_map)
+int	check_if_out_of_bounds(char **map, int i, int j, int size_map)
 {
-	int	check;
-
-	if (map[x] && map[x + 1])
-	{
-		check = check_access(map, x + 1, y, size_map);
-		if ((check != SUCCESS && check != FAILURE))
-			return (check);
-	}
-	if (map[x][y] && map[x][y + 1])
-	{
-		check = check_access(map, x, y + 1, size_map);
-		if ((check != SUCCESS && check != FAILURE))
-			return (check);
-	}
-	if (map[x][y] && y - 1 >= 0)
-	{
-		check = check_access(map, x, y - 1, size_map);
-		if ((check != SUCCESS && check != FAILURE))
-			return (check);
-	}
-	if (map[x] && x - 1 >= 0)
-	{
-		check = check_access(map, x - 1, y, size_map);
-		if ((check != SUCCESS && check != FAILURE))
-			return (check);
-	}
+	if (i - 1 < 0 || j - 1 < 0 || j >= (int)ft_strlen(map[i]) || i >= size_map)
+		return (FAILURE);
+	if (j - 1 > (int)ft_strlen(map[i - 1]) || j + 1 > (int)ft_strlen(map[i
+			+ 1]))
+		return (FAILURE);
+	if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' '
+		|| map[i][j + 1] == ' ')
+		return (FAILURE);
 	return (SUCCESS);
 }
 
-int	check_access(char **map, int x, int y, int size_map)
+int	check_line(char **map, int i, int j, int size_map)
 {
-	if (!map)
-		return (ERR_MALLOC);
-	if (y < 0 || x < 0 || x >= size_map || y >= (int)ft_strlen(map[x])
-		|| map[x][y] == '1')
+	if (!map[i][j])
+		return (0);
+	if (map[i][j] == '0')
+		if (check_if_out_of_bounds(map, i, j, size_map) == FAILURE)
+			return (1);
+	return (check_line(map, i, j + 1, size_map));
+}
+
+int	check_access(char **map, int size_map, int i)
+{
+	if (!map[i])
+		return (SUCCESS);
+	if (check_line(map, i, 0, size_map))
 		return (FAILURE);
-	printf("char :%c, x %d y %d,line %s\n", map[x][y], x, y, map[x]);
-	if (map[x][y] == ' ')
-		return (ERR_PARSING);
-	map[x][y] = '1';
-	return (recusivity(map, x, y, size_map));
+	return (check_access(map, size_map, i + 1));
 }

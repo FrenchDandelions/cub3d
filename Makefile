@@ -9,7 +9,8 @@ LIB_FILE = $(LIB_DIR)libft.a
 MLX_DIR = ./minilibx-linux/
 MLX_FILE = $(MLX_DIR)libmlx.a
 SRC_FILES = srcs/main.c \
-			srcs/get_map.c \
+			srcs/get_map_list.c \
+			srcs/get_map_list_utils.c \
 			srcs/check_access.c \
 			srcs/check_elements.c \
 			srcs/check_file_name.c \

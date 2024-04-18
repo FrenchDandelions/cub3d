@@ -22,6 +22,13 @@ static int	check_struct(t_cub *cub, int mode)
 			return (0);
 		return (1);
 	}
+	else if (mode == 2)
+	{
+		if (cub->img.north_texture && cub->img.south_texture
+			&& cub->img.west_texture && cub->img.east_texture
+			&& cub->img.floor_color && cub->img.sky_color)
+			return (1);
+	}
 	else
 	{
 		if (cub->img.north_texture && cub->img.south_texture
@@ -103,7 +110,7 @@ int	fill_struct(t_cub *cub, char **map, int i, int j)
 		if (status)
 			return (status);
 	}
-	else
+	else if (check_struct(cub, 2))
 	{
 		cub->img.map[j] = map[i];
 		return (cub->img.map[j + 1] = NULL, fill_struct(cub, map, i + 1, j
