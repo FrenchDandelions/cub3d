@@ -70,6 +70,7 @@ typedef struct s_cub
 	void			*mlx_ptr;
 	void			*mlx_win;
 	int				size_list;
+	int				status;
 	t_map			*map;
 	t_img			img;
 	t_pos			pos;

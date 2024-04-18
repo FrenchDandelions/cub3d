@@ -75,20 +75,19 @@ static int	fill_texture(char *s, t_cub *cub)
 	return (2);
 }
 
-int	is_texture(char *s)
+int	is_empty(t_cub *cub, int j, int i, char **map)
 {
-	if (ft_strncmp(s, "NO ", 3) == 0)
-		return (1);
-	else if (ft_strncmp(s, "SO ", 3) == 0)
-		return (1);
-	else if (ft_strncmp(s, "WE ", 3) == 0)
-		return (1);
-	else if (ft_strncmp(s, "EA ", 3) == 0)
-		return (1);
-	else if (ft_strncmp(s, "F ", 2) == 0)
-		return (1);
-	else if (ft_strncmp(s, "C ", 2) == 0)
-		return (1);
+	// printf("Here : %s\n", map[i]);
+	if (!map[i][0] && j == 0 && !cub->img.map[j])
+	{
+		cub->status = fill_struct(cub, map, i + 1, j);
+		return (cub->status);
+	}
+	else if (!map[i][0] && j > 0 && cub->img.map[j - 1])
+	{
+		cub->status = 2;
+		return (2);
+	}
 	return (0);
 }
 
@@ -112,6 +111,8 @@ int	fill_struct(t_cub *cub, char **map, int i, int j)
 	}
 	else if (check_struct(cub, 2))
 	{
+		if (is_empty(cub, j, i, map) && cub->status)
+			return ((cub->status));
 		cub->img.map[j] = map[i];
 		return (cub->img.map[j + 1] = NULL, fill_struct(cub, map, i + 1, j
 				+ 1));

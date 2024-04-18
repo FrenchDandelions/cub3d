@@ -34,6 +34,7 @@ static void	initialize_struct(t_cub *cub)
 	cub->pos.orientation = '\0';
 	cub->pos.start_x = -1;
 	cub->pos.start_y = -1;
+	cub->status = 0;
 }
 
 void	print_map(t_cub *cub)
@@ -110,7 +111,7 @@ int	main(int argc, char **argv)
 		status = create_map_list(argv[1], &cub);
 		if (status != SUCCESS && status != 0)
 			return (print_err(status), free_all(&cub), status);
-		print_map_list(&cub);
+		// print_map_list(&cub);
 		status = check_elements(&cub);
 		if (status != SUCCESS)
 			return (print_err(status), free_all(&cub), status);

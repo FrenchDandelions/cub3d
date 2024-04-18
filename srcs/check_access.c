@@ -12,7 +12,14 @@
 
 #include "../includes/cub3d.h"
 
-int	check_if_out_of_bounds(char **map, int i, int j, int size_map)
+static int	is_player(char c)
+{
+	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
+		return (1);
+	return (0);
+}
+
+static int	check_if_out_of_bounds(char **map, int i, int j, int size_map)
 {
 	if (i - 1 < 0 || j - 1 < 0 || j >= (int)ft_strlen(map[i]) || i >= size_map)
 		return (FAILURE);
@@ -25,11 +32,11 @@ int	check_if_out_of_bounds(char **map, int i, int j, int size_map)
 	return (SUCCESS);
 }
 
-int	check_line(char **map, int i, int j, int size_map)
+static int	check_line(char **map, int i, int j, int size_map)
 {
 	if (!map[i][j])
 		return (0);
-	if (map[i][j] == '0')
+	if (map[i][j] == '0' || is_player(map[i][j]))
 		if (check_if_out_of_bounds(map, i, j, size_map) == FAILURE)
 			return (1);
 	return (check_line(map, i, j + 1, size_map));
