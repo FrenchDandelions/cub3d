@@ -15,12 +15,18 @@
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
+# include <X11/X.h>
+# include <X11/keysym.h>
 
 # define SUCCESS 7
 # define FAILURE 0
 # define ERR_MALLOC -2
 # define ERR_PARSING 2
 # define MAP_ERR "Error\nThe map isn't properly formatted"
+# define ERR_CLR_F -7
+# define ERR_CLR_S -8
+# define MAP_HEIGHT 1080
+# define MAP_WIDTH 1920
 
 typedef struct s_img
 {
@@ -38,6 +44,8 @@ typedef struct s_img
 	int				width;
 	int				height;
 	int				size_map;
+	int				rgb_floor[3];
+	int				rgb_sky[3];
 }					t_img;
 
 /*
@@ -88,5 +96,9 @@ int					create_map_list(char *map_name, t_cub *cub);
 void				ft_delete_list(t_map **map);
 int					list_to_map(t_map *map, t_cub *cub, char ***new_map, int i);
 void				print_error_exit(char *err, t_cub *cub);
+int					ft_atoi_rgb(char *str, int *index, int *flag);
+int					check_rgb(t_cub *cub);
+int					get_color(int *colors);
+void				init_mlx(t_cub *cub);
 
 #endif

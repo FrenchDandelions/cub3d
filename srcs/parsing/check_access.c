@@ -12,6 +12,11 @@
 
 #include "../includes/cub3d.h"
 
+static int	len(char *s)
+{
+	return ((int)ft_strlen(s));
+}
+
 static int	is_player(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'W' || c == 'E')
@@ -23,8 +28,7 @@ static int	check_if_out_of_bounds(char **map, int i, int j, int size_map)
 {
 	if (i - 1 < 0 || j - 1 < 0 || j >= (int)ft_strlen(map[i]) || i >= size_map)
 		return (FAILURE);
-	if (j - 1 > (int)ft_strlen(map[i - 1]) || j + 1 > (int)ft_strlen(map[i
-			+ 1]))
+	if (j - 1 > len(map[i - 1]) || j + 1 > len(map[i + 1]))
 		return (FAILURE);
 	if (map[i - 1][j] == ' ' || map[i + 1][j] == ' ' || map[i][j - 1] == ' '
 		|| map[i][j + 1] == ' ')

@@ -79,10 +79,18 @@ void	print_and_free_struct(t_cub *cub)
 
 void	print_err(int err)
 {
-	if (err == 2)
+	if (err == ERR_PARSING)
 		ft_dprintf(STDERR_FILENO, "%s\n", MAP_ERR);
 	if (err == ERR_MALLOC)
 		ft_dprintf(STDERR_FILENO, "Error\nMalloc\n");
+	if (err == FAILURE)
+		ft_dprintf(STDERR_FILENO, "Error\nThe map isn't surrounded by walls\n");
+	if (err == ERR_CLR_F)
+		ft_dprintf(STDERR_FILENO,
+			"Error\nThe floor color isn't properly formatted\n");
+	if (err == ERR_CLR_S)
+		ft_dprintf(STDERR_FILENO,
+			"Error\nThe sky color isn't properly formatted\n");
 }
 
 void	print_map_list(t_cub *cub)
@@ -102,7 +110,6 @@ int	main(int argc, char **argv)
 	t_cub	cub;
 	int		status;
 
-	// char	**new_map;
 	initialize_struct(&cub);
 	if (argc == 2)
 	{
@@ -117,9 +124,13 @@ int	main(int argc, char **argv)
 			return (print_err(status), free_all(&cub), status);
 		status = check_access(cub.img.map, cub.img.size_map, 0);
 		if (status != SUCCESS)
-			return (print_err(2), free_all(&cub), status);
+			return (print_err(status), free_all(&cub), status);
+		status = check_rgb(&cub);
+		if (status != SUCCESS)
+			return (print_err(status), free_all(&cub), status);
 		print_map(&cub);
-		free_all(&cub);
+		init_mlx(&cub);
+		// free_all(&cub);
 		return (0);
 	}
 	else

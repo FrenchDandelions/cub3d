@@ -12,25 +12,6 @@
 
 #include "get_next_line.h"
 
-size_t	ft_gnl_strlcpy(char *dest, char *src, size_t destsize)
-{
-	size_t	srcsize;
-	size_t	i;
-
-	i = 0;
-	srcsize = ft_strlen(src);
-	if (destsize > 0)
-	{
-		while (i < srcsize && i < destsize - 1)
-		{
-			dest[i] = src[i];
-			i++;
-		}
-		dest[i] = '\0';
-	}
-	return (srcsize);
-}
-
 // static char	*ft_gnl_strdup(char *s)
 // {
 // 	char	*copy;
