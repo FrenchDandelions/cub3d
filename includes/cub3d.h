@@ -17,6 +17,7 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <sys/time.h>
 
 # define SUCCESS 7
 # define FAILURE 0
@@ -46,14 +47,21 @@ typedef struct s_img
 	int				size_map;
 	int				rgb_floor[3];
 	int				rgb_sky[3];
+	int				endian;
+	void			*img_floor;
+	void			*img_sky;
+	int				pixel_bits;
+	int				line_bytes;
+	char			*buffer;
+	int				pixel;
 }					t_img;
 
 /*
-p = map[y][x];
+p = map[x][y];
 
-.............x......
+.............y......
 ....................
-y............p......
+x............p......
 ....................
 */
 

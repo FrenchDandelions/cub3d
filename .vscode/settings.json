@@ -1,6 +1,11 @@
 {
     "files.associations": {
         "cub3d.h": "c",
-        "get_next_line.h": "c"
+        "get_next_line.h": "c",
+        "time.h": "c",
+        "libft.h": "c",
+        "ft_dprintf.h": "c",
+        "sprintf.h": "c",
+        "stdlib.h": "c"
     }
 }

@@ -27,9 +27,12 @@ static void	initialize_struct(t_cub *cub)
 	cub->img.south = NULL;
 	cub->img.west = NULL;
 	cub->img.east = NULL;
+	cub->img.img_floor = NULL;
+	cub->img.img_sky = NULL;
 	cub->img.width = 64;
 	cub->img.height = 64;
 	cub->img.size_map = 0;
+	cub->img.endian = 0;
 	cub->size_list = 0;
 	cub->pos.orientation = '\0';
 	cub->pos.start_x = -1;
