@@ -12,9 +12,12 @@
 
 #include "libft.h"
 
-static size_t	get_len(const char *s, size_t i)
+size_t	ft_strlen(const char *s)
 {
-	while (s[i])
+	size_t	i;
+
+	i = 0;
+	while (s && s[i])
 	{
 		if (!s[i + 1])
 			return (i + 1);
@@ -35,14 +38,4 @@ static size_t	get_len(const char *s, size_t i)
 		i += 8;
 	}
 	return (i);
-}
-
-size_t	ft_strlen(const char *s)
-{
-	size_t	i;
-
-	i = 0;
-	if (!s)
-		return (0);
-	return (get_len(s, i));
 }
