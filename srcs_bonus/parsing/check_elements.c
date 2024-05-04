@@ -22,7 +22,7 @@ static int	is_starting_point(char c)
 static int	accepted_chars(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == '1' || c == '0'
-		|| c == ' ')
+		|| c == ' ' || c == '2')
 		return (1);
 	return (0);
 }
