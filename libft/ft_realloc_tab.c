@@ -42,9 +42,7 @@ char	**ft_realloc_tab(char **ptr, size_t newsize, size_t oldsize)
 		return (free_tab(ptr), NULL);
 	while (ptr[i])
 	{
-		newptr[i] = ft_strdup(ptr[i]);
-		if (!newptr[i])
-			return (free_tab(newptr), free_tab(ptr), NULL);
+		newptr[i] = ptr[i];
 		i++;
 	}
 	while (i < newsize)
@@ -52,6 +50,6 @@ char	**ft_realloc_tab(char **ptr, size_t newsize, size_t oldsize)
 		newptr[i] = NULL;
 		i++;
 	}
-	free_tab(ptr);
+	ft_memdel(ptr);
 	return (newptr);
 }
