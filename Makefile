@@ -101,6 +101,10 @@ uclean : fclean
 
 re: fclean $(NAME)
 
+cre:
+	@clear
+	@make re --no-print-directory
+
 mlx_re: uclean $(NAME)
 
 .PHONY: all clean fclean uclean re mlx_re bonus
