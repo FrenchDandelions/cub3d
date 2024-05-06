@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/06 10:35:28 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/06 11:05:11 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,5 +108,6 @@ int					ft_atoi_rgb(char *str, int *index, int *flag);
 int					check_rgb(t_cub *cub);
 int					get_color(int *colors);
 void				init_mlx(t_cub *cub);
+void				free_and_exit(t_cub *cub);
 
 #endif
