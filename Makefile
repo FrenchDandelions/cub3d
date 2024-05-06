@@ -23,6 +23,7 @@ SRC_FILES = srcs/main/main.c \
 			srcs/parsing/rgb_utils.c \
 			srcs/parsing/rgb.c \
 			srcs/mlx/start.c \
+			srcs/mlx/free_objects.c \
 
 SRC_BONUS = srcs_bonus/main/main.c \
 			srcs_bonus/parsing/get_map_list.c \
@@ -46,8 +47,13 @@ CFLAGS = -Wall -Wextra -Werror -I -L$(LIB_DIR) -Ilibft -MMD -MP
 LDFLAGS = -L./minilibx-linux/ -lmlx_Linux -lX11 -lXext -lm
 MLX_EX = $(MLX_FILE) $(LDFLAGS)
 
+INCLUDES := includes \
+	libft
+
+INCLUDES_FLAGS := $(addprefix -I , $(INCLUDES))
+
 .c.o:
-	@$(CC) $(CFLAGS) -c $< -o $@
+	@$(CC) $(CFLAGS) $(INCLUDES_FLAGS) -c $< -o $@
 
 all: $(NAME)  
 
@@ -68,12 +74,12 @@ $(LIB_FILE):
 
 $(NAME) : $(MLX_DIR) $(MLX_FILE) $(LIB_FILE) $(OBJECTS) $(INCLUDE) Makefile
 	@echo "$(GOLD_COLOR)Compiling cub3d...$(RESET)"
-	$(CC) $(CFLAGS) -o $(NAME) -Ilibft $(OBJECTS) $(LIB_FILE) $(MLX_EX)
+	$(CC) $(CFLAGS) -o $(NAME) $(INCLUDES_FLAGS) $(OBJECTS) $(LIB_FILE) $(MLX_EX)
 	@echo "$(GOLD_COLOR)cub3d compiled ! :)$(RESET)"
 
 $(NAMEB) : $(MLX_DIR) $(MLX_FILE) $(LIB_FILE) $(OBJECTSB) $(INCLUDE) Makefile
 	@echo "$(GOLD_COLOR)Compiling cub3d_bonus...$(RESET)"
-	$(CC) $(CFLAGS) -o $(NAMEB) -Ilibft $(OBJECTSB) $(LIB_FILE) $(MLX_EX)
+	$(CC) $(CFLAGS) -o $(NAMEB) $(INCLUDES_FLAGS) $(OBJECTSB) $(LIB_FILE) $(MLX_EX)
 	@echo "$(GOLD_COLOR)cub3d_bonus compiled ! :)$(RESET)"
 
 bonus : $(NAMEB)
