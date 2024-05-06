@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/04/11 14:11:49 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/06 10:35:28 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # define FAILURE 0
 # define ERR_MALLOC -2
 # define ERR_PARSING 2
-# define MAP_ERR "Error\nThe map isn't properly formatted"
+# define MAP_ERR "Error\nThe map isn't properly formatted\n"
 # define ERR_CLR_F -7
 # define ERR_CLR_S -8
 # define MAP_HEIGHT 1080

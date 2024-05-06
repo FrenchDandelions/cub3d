@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:58:09 by thole             #+#    #+#             */
-/*   Updated: 2024/04/17 15:58:10 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/06 10:38:46 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ int	create_map_list(char *map_name, t_cub *cub)
 	status = 0;
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-		print_error_exit("Error\nCouldn't open the map", cub);
+		print_error_exit("Error\nCouldn't open the map\n", cub);
 	map_list = NULL;
 	map = NULL;
 	if (get_map(fd, &map_list, &status, cub) != SUCCESS)
