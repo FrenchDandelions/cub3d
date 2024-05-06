@@ -1,6 +1,7 @@
 # Own ignores
 cub3d
 cub3d_bonus
+minilibx-linux
 
 # Prerequisites
 *.d
