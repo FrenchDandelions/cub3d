@@ -3,27 +3,27 @@
 /*                                                        :::      ::::::::   */
 /*   start.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:29:16 by thole             #+#    #+#             */
-/*   Updated: 2024/04/21 18:29:17 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/06 11:19:52 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
 
+static int	handle_cross(t_cub *cub)
+{
+	free_and_exit(cub);
+	return (0);
+}
+
 int	handle_key(int code, t_cub *cub)
 {
+	printf("%d\n", code);
 	if (code == XK_Escape)
 	{
-		mlx_loop_end(cub->mlx_ptr);
-		mlx_destroy_image(cub->mlx_ptr, cub->img.img_floor);
-		mlx_destroy_image(cub->mlx_ptr, cub->img.img_sky);
-		mlx_destroy_window(cub->mlx_ptr, cub->mlx_win);
-		mlx_destroy_display(cub->mlx_ptr);
-		ft_memdel(cub->mlx_ptr);
-		free_all(cub);
-		exit(0);
+		free_and_exit(cub);
 	}
 	return (0);
 }
@@ -68,5 +68,6 @@ void	init_mlx(t_cub *cub)
 	get_imgs(cub, cub->img.img_sky, get_color(cub->img.rgb_sky), MAP_HEIGHT
 		/ 2);
 	mlx_hook(cub->mlx_win, KeyPress, KeyPressMask, &handle_key, cub);
+	mlx_hook(cub->mlx_win, 17, 0, &handle_cross, cub);
 	mlx_loop(cub->mlx_ptr);
 }

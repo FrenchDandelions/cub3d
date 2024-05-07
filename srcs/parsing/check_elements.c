@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:30:42 by thole             #+#    #+#             */
-/*   Updated: 2024/04/16 15:30:43 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/07 13:57:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,8 +35,8 @@ static int	parse_line(char *line, int i, int j, t_cub *cub)
 	{
 		if (cub->pos.orientation)
 			return (ERR_PARSING);
-		cub->pos.start_x = i;
-		cub->pos.start_y = j;
+		cub->pos.start_x = (double)i;
+		cub->pos.start_y = (double)j;
 		cub->pos.orientation = line[j];
 	}
 	if (!accepted_chars(line[j]))
