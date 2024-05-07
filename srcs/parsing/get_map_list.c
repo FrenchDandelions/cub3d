@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:58:09 by thole             #+#    #+#             */
-/*   Updated: 2024/05/06 10:38:46 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/07 13:50:46 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,6 +74,8 @@ int	get_map(int fd, t_map **map, int *status, t_cub *cub)
 		if (!(*map))
 			return (ERR_MALLOC);
 	}
+	if (cub->size_list >= 100)
+		return(2);
 	return (cub->size_list++, get_map(fd, map, status, cub));
 }
 

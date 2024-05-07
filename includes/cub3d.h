@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/06 11:05:11 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/07 13:56:31 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,8 +68,8 @@ x............p......
 typedef struct s_pos
 {
 	char			orientation;
-	int				start_x;
-	int				start_y;
+	double			start_x;
+	double			start_y;
 }					t_pos;
 
 typedef struct s_map

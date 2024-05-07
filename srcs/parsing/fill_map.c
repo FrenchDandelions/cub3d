@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:28:57 by thole             #+#    #+#             */
-/*   Updated: 2024/04/11 16:28:58 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/07 13:59:56 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int	checker(char **cub_str, int size, char *s)
 	char	*temp;
 
 	temp = ft_substr_cub3d(s, size, 0, *cub_str);
+	if (!temp)
+		return (ERR_MALLOC);
 	if (temp == *cub_str && temp)
 		return (2);
 	*cub_str = temp;
-	if (!*cub_str)
-		return (ERR_MALLOC);
 	if (!*cub_str[0])
 		return (2);
 	return (0);
