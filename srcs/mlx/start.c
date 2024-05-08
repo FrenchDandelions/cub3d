@@ -10,7 +10,7 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "cub3d.h"
 
 static int	handle_cross(t_cub *cub)
 {
@@ -18,17 +18,117 @@ static int	handle_cross(t_cub *cub)
 	return (0);
 }
 
+#include <math.h>
+
 int	handle_key(int code, t_cub *cub)
 {
-	printf("%d\n", code);
 	if (code == XK_Escape)
 	{
 		free_and_exit(cub);
 	}
+	if (code == XK_w)
+	{
+		if (cub->img.map[(int)(cub->pos.start_y + cub->ray.dir_x
+				* cub->ray.move_speed)][(int)cub->pos.start_x] != '1')
+		{
+			cub->pos.start_y += cub->ray.dir_x * cub->ray.move_speed;
+		}
+		if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
+				+ cub->ray.dir_y * cub->ray.move_speed)] != '1')
+		{
+			cub->pos.start_x += cub->ray.dir_y * cub->ray.move_speed;
+		}
+	}
+	else if (code == XK_s)
+	{
+		if (cub->img.map[(int)(cub->pos.start_y - cub->ray.dir_x
+				* cub->ray.move_speed)][(int)cub->pos.start_x] != '1')
+		{
+			cub->pos.start_y -= cub->ray.dir_x * cub->ray.move_speed;
+		}
+		if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
+				- cub->ray.dir_y * cub->ray.move_speed)] != '1')
+		{
+			cub->pos.start_x -= cub->ray.dir_y * cub->ray.move_speed;
+		}
+	}
+	else if (code == XK_a)
+	{
+		cub->ray.old_dir_x = cub->ray.dir_x;
+		cub->ray.dir_x = cub->ray.dir_x * cos(-cub->ray.rot_speed)
+			- cub->ray.dir_y * sin(-cub->ray.rot_speed);
+		cub->ray.dir_y = cub->ray.old_dir_x * sin(-cub->ray.rot_speed)
+			+ cub->ray.dir_y * cos(-cub->ray.rot_speed);
+		cub->ray.old_plane_x = cub->ray.plane_x;
+		cub->ray.plane_x = cub->ray.plane_x * cos(-cub->ray.rot_speed)
+			- cub->ray.plane_y * sin(-cub->ray.rot_speed);
+		cub->ray.plane_y = cub->ray.old_plane_x * sin(-cub->ray.rot_speed)
+			+ cub->ray.plane_y * cos(-cub->ray.rot_speed);
+	}
+	else if (code == XK_d)
+	{
+		cub->ray.old_dir_x = cub->ray.dir_x;
+		cub->ray.dir_x = cub->ray.dir_x * cos(cub->ray.rot_speed)
+			- cub->ray.dir_y * sin(cub->ray.rot_speed);
+		cub->ray.dir_y = cub->ray.old_dir_x * sin(cub->ray.rot_speed)
+			+ cub->ray.dir_y * cos(cub->ray.rot_speed);
+		cub->ray.old_plane_x = cub->ray.plane_x;
+		cub->ray.plane_x = cub->ray.plane_x * cos(cub->ray.rot_speed)
+			- cub->ray.plane_y * sin(cub->ray.rot_speed);
+		cub->ray.plane_y = cub->ray.old_plane_x * sin(cub->ray.rot_speed)
+			+ cub->ray.plane_y * cos(cub->ray.rot_speed);
+	}
 	return (0);
 }
 
-void	get_imgs(t_cub *cub, void *img, int color, int pos)
+void	put_ray(t_cub *cub, int color, int color2)
+{
+	int		y;
+	int		x;
+	void	*img;
+	char	*buffer;
+
+	img = mlx_new_image(cub->mlx_ptr, 12, 50);
+	buffer = mlx_get_data_addr(img, &cub->img.pixel_bits, &cub->img.line_bytes,
+			&cub->img.endian);
+	y = -1;
+	while (++y < 25)
+	{
+		x = -1;
+		while (++x < 12)
+		{
+			cub->img.pixel = (y * cub->img.line_bytes) + (x * 4);
+			if (cub->img.endian == 0)
+			{
+				buffer[cub->img.pixel + 0] = (color)&0xFF;
+				buffer[cub->img.pixel + 1] = (color >> 8) & 0xFF;
+				buffer[cub->img.pixel + 2] = (color >> 16) & 0xFF;
+				buffer[cub->img.pixel + 3] = (color >> 24);
+			}
+		}
+	}
+	y--;
+	while (++y < 50)
+	{
+		x = -1;
+		while (++x < 12)
+		{
+			cub->img.pixel = (y * cub->img.line_bytes) + (x * 4);
+			if (cub->img.endian == 0)
+			{
+				buffer[cub->img.pixel + 0] = (color2)&0xFF;
+				buffer[cub->img.pixel + 1] = (color2 >> 8) & 0xFF;
+				buffer[cub->img.pixel + 2] = (color2 >> 16) & 0xFF;
+				buffer[cub->img.pixel + 3] = (color2 >> 24);
+			}
+		}
+	}
+	mlx_put_image_to_window(cub->mlx_ptr, cub->mlx_win, img, MAP_WIDTH / 2,
+		MAP_HEIGHT / 2 - 25);
+	mlx_destroy_image(cub->mlx_ptr, img);
+}
+
+void	get_imgs(t_cub *cub, void *img, int color, int color2)
 {
 	int	y;
 	int	x;
@@ -51,7 +151,69 @@ void	get_imgs(t_cub *cub, void *img, int color, int pos)
 			}
 		}
 	}
-	mlx_put_image_to_window(cub->mlx_ptr, cub->mlx_win, img, 0, pos);
+	y--;
+	while (++y < MAP_HEIGHT)
+	{
+		x = -1;
+		while (++x < MAP_WIDTH)
+		{
+			cub->img.pixel = (y * cub->img.line_bytes) + (x * 4);
+			if (cub->img.endian == 0)
+			{
+				cub->img.buffer[cub->img.pixel + 0] = (color2)&0xFF;
+				cub->img.buffer[cub->img.pixel + 1] = (color2 >> 8) & 0xFF;
+				cub->img.buffer[cub->img.pixel + 2] = (color2 >> 16) & 0xFF;
+				cub->img.buffer[cub->img.pixel + 3] = (color2 >> 24);
+			}
+		}
+	}
+}
+
+void	set_dir(t_cub *cub)
+{
+	if (cub->pos.orientation == 'W')
+	{
+		cub->ray.dir_x = 0;
+		cub->ray.dir_y = 1;
+	}
+	if (cub->pos.orientation == 'S')
+	{
+		cub->ray.dir_x = 1;
+		cub->ray.dir_y = 0;
+	}
+	if (cub->pos.orientation == 'N')
+	{
+		cub->ray.dir_x = -1;
+		cub->ray.dir_y = 0;
+	}
+	if (cub->pos.orientation == 'E')
+	{
+		cub->ray.dir_x = 0;
+		cub->ray.dir_y = -1;
+	}
+}
+
+void	initialize_t_ray(t_cub *cub)
+{
+	set_dir(cub);
+	cub->ray.plane_x = 0;
+	cub->ray.plane_y = 0.66;
+	cub->ray.time = 0;
+	cub->ray.oldtime = 0;
+	cub->ray.step_x = 0;
+	cub->ray.step_y = 0;
+	cub->ray.move_speed = MOV;
+	cub->ray.rot_speed = ROT;
+}
+
+int	ray_loop(t_cub *cub)
+{
+	mlx_destroy_image(cub->mlx_ptr, cub->img.img_floor);
+	cub->img.img_floor = mlx_new_image(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT);
+	get_imgs(cub, cub->img.img_floor, get_color(cub->img.rgb_sky),
+		get_color(cub->img.rgb_floor));
+	calculate_ray(cub);
+	return (1);
 }
 
 void	init_mlx(t_cub *cub)
@@ -62,12 +224,18 @@ void	init_mlx(t_cub *cub)
 	cub->mlx_win = mlx_new_window(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT, "cub3d");
 	if (!cub->mlx_win)
 		(free_all(cub), exit(2));
-	cub->img.img_floor = mlx_new_image(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT / 2);
-	cub->img.img_sky = mlx_new_image(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT / 2);
-	get_imgs(cub, cub->img.img_floor, get_color(cub->img.rgb_floor), 0);
-	get_imgs(cub, cub->img.img_sky, get_color(cub->img.rgb_sky), MAP_HEIGHT
-		/ 2);
+	cub->img.img_floor = mlx_new_image(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT);
+	// cub->img.img_sky = mlx_new_image(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT
+	// / 2);
+	get_imgs(cub, cub->img.img_floor, get_color(cub->img.rgb_sky),
+		get_color(cub->img.rgb_floor));
+	// get_imgs(cub, cub->img.img_sky, get_color(cub->img.rgb_sky), MAP_HEIGHT
+	// 	/ 2);
+	// put_ray(cub, get_color(cub->img.rgb_sky), get_color(cub->img.rgb_floor));
+	initialize_t_ray(cub);
+	calculate_ray(cub);
 	mlx_hook(cub->mlx_win, KeyPress, KeyPressMask, &handle_key, cub);
 	mlx_hook(cub->mlx_win, 17, 0, &handle_cross, cub);
+	mlx_loop_hook(cub->mlx_ptr, &ray_loop, cub);
 	mlx_loop(cub->mlx_ptr);
 }

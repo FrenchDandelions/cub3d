@@ -35,8 +35,8 @@ static int	parse_line(char *line, int i, int j, t_cub *cub)
 	{
 		if (cub->pos.orientation)
 			return (ERR_PARSING);
-		cub->pos.start_x = i;
-		cub->pos.start_y = j;
+		cub->pos.start_x = j;
+		cub->pos.start_y = i;
 		cub->pos.orientation = line[j];
 	}
 	if (!accepted_chars(line[j]))
