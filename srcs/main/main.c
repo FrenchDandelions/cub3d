@@ -51,10 +51,10 @@ void	print_map(t_cub *cub)
 	if (cub->img.map)
 		for (int i = 0; cub->img.map[i]; i++)
 			printf("%s\n", cub->img.map[i]);
-	printf("Pos x: %d, Pos y : %d\n", cub->pos.start_x, cub->pos.start_y);
-	if (cub->pos.start_x != -1)
+	printf("Pos x: %f, Pos y : %f\n", cub->pos.start_y, cub->pos.start_x);
+	if (cub->pos.start_y != -1)
 		printf("Char postion : %c\n",
-			cub->img.map[cub->pos.start_x][cub->pos.start_y]);
+			cub->img.map[(int)cub->pos.start_y][(int)cub->pos.start_x]);
 }
 
 void	free_all(t_cub *cub)

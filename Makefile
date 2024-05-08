@@ -24,6 +24,7 @@ SRC_FILES = srcs/main/main.c \
 			srcs/parsing/rgb.c \
 			srcs/mlx/start.c \
 			srcs/mlx/free_objects.c \
+			srcs/raycasting/raycast.c \
 
 SRC_BONUS = srcs_bonus/main/main.c \
 			srcs_bonus/parsing/get_map_list.c \

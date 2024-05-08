@@ -28,6 +28,12 @@
 # define ERR_CLR_S -8
 # define MAP_HEIGHT 1080
 # define MAP_WIDTH 1920
+# define RED 0xFF0000
+# define GOLD 0xFFD700
+# define BLUE 0x0000FF
+# define GREEN 0x7CFC00
+# define ROT 0.2
+# define MOV 0.6
 
 typedef struct s_img
 {
@@ -79,6 +85,40 @@ typedef struct s_map
 	struct s_map	*prev;
 }					t_map;
 
+typedef struct s_ray
+{
+	double			dir_x;
+	double			dir_y;
+	double			plane_x;
+	double			plane_y;
+	double			time;
+	double			oldtime;
+	double			cameraX;
+	double			width_screen;
+	double			ray_dir_x;
+	double			ray_dir_y;
+	int				map_x;
+	int				map_y;
+	double			side_dist_x;
+	double			side_dist_y;
+	double			delta_dist_x;
+	double			delta_dist_y;
+	double			perp_wall_dist;
+	int				step_x;
+	int				step_y;
+	int				hit;
+	int				side;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
+	double			move_speed;
+	double			rot_speed;
+	double			old_dir_x;
+	double			old_plane_x;
+	double			frame_time;
+	int				color;
+}					t_ray;
+
 typedef struct s_cub
 {
 	char			**initial_map;
@@ -90,6 +130,7 @@ typedef struct s_cub
 	t_map			*map;
 	t_img			img;
 	t_pos			pos;
+	t_ray			ray;
 }					t_cub;
 
 bool				check_name_map(char *s);
@@ -109,5 +150,6 @@ int					check_rgb(t_cub *cub);
 int					get_color(int *colors);
 void				init_mlx(t_cub *cub);
 void				free_and_exit(t_cub *cub);
+int					calculate_ray(t_cub *cub);
 
 #endif
