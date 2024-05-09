@@ -1,5 +1,5 @@
-NAME = cub3d
-NAMEB = cub3d_bonus
+NAME = cub3D
+NAMEB = cub3D_bonus
 
 VERMILION_RED=\033[1;31m
 AZURE_BLUE=\033[1;34m

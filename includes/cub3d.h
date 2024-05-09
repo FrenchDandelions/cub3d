@@ -32,6 +32,7 @@
 # define GOLD 0xFFD700
 # define BLUE 0x0000FF
 # define GREEN 0x7CFC00
+# define PINK 0x1ABC9C
 # define ROT 0.2
 # define MOV 0.6
 

@@ -54,11 +54,17 @@ void	get_wall_dist(t_cub *cub)
 		cub->ray.draw_end = MAP_HEIGHT - 1;
 	if (cub->ray.side == 1)
 	{
-		cub->ray.color = BLUE;
+		if (cub->ray.ray_dir_y > 0)
+			cub->ray.color = BLUE;
+		else
+			cub->ray.color = GOLD;
 	}
 	else
 	{
-		cub->ray.color = GREEN;
+		if (cub->ray.ray_dir_x > 0)
+			cub->ray.color = GREEN;
+		else
+			cub->ray.color = PINK;
 	}
 }
 
