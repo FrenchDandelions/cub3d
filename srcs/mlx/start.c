@@ -23,36 +23,16 @@ static int	handle_cross(t_cub *cub)
 int	handle_key(int code, t_cub *cub)
 {
 	if (code == XK_Escape)
-	{
 		free_and_exit(cub);
-	}
 	if (code == XK_w)
-	{
-		if (cub->img.map[(int)(cub->pos.start_y + cub->ray.dir_x
-				* cub->ray.move_speed)][(int)cub->pos.start_x] != '1')
-		{
-			cub->pos.start_y += cub->ray.dir_x * cub->ray.move_speed;
-		}
-		if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
-				+ cub->ray.dir_y * cub->ray.move_speed)] != '1')
-		{
-			cub->pos.start_x += cub->ray.dir_y * cub->ray.move_speed;
-		}
-	}
+		move_up(cub);
 	else if (code == XK_s)
-	{
-		if (cub->img.map[(int)(cub->pos.start_y - cub->ray.dir_x
-				* cub->ray.move_speed)][(int)cub->pos.start_x] != '1')
-		{
-			cub->pos.start_y -= cub->ray.dir_x * cub->ray.move_speed;
-		}
-		if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
-				- cub->ray.dir_y * cub->ray.move_speed)] != '1')
-		{
-			cub->pos.start_x -= cub->ray.dir_y * cub->ray.move_speed;
-		}
-	}
-	else if (code == XK_a)
+		move_down(cub);
+	if (code == XK_a)
+		move_left(cub);
+	else if (code == XK_d)
+		move_right(cub);
+	if (code == XK_Right)
 	{
 		cub->ray.old_dir_x = cub->ray.dir_x;
 		cub->ray.dir_x = cub->ray.dir_x * cos(-cub->ray.rot_speed)
@@ -65,7 +45,7 @@ int	handle_key(int code, t_cub *cub)
 		cub->ray.plane_y = cub->ray.old_plane_x * sin(-cub->ray.rot_speed)
 			+ cub->ray.plane_y * cos(-cub->ray.rot_speed);
 	}
-	else if (code == XK_d)
+	else if (code == XK_Left)
 	{
 		cub->ray.old_dir_x = cub->ray.dir_x;
 		cub->ray.dir_x = cub->ray.dir_x * cos(cub->ray.rot_speed)
@@ -174,30 +154,36 @@ void	set_dir(t_cub *cub)
 	if (cub->pos.orientation == 'W')
 	{
 		cub->ray.dir_x = 0;
-		cub->ray.dir_y = 1;
+		cub->ray.dir_y = -1;
+		cub->ray.plane_x = -0.66;
+		cub->ray.plane_y = 0;
 	}
 	if (cub->pos.orientation == 'S')
 	{
 		cub->ray.dir_x = 1;
 		cub->ray.dir_y = 0;
+		cub->ray.plane_x = 0;
+		cub->ray.plane_y = -0.66;
 	}
 	if (cub->pos.orientation == 'N')
 	{
 		cub->ray.dir_x = -1;
 		cub->ray.dir_y = 0;
+		cub->ray.plane_x = 0;
+		cub->ray.plane_y = 0.66;
 	}
 	if (cub->pos.orientation == 'E')
 	{
 		cub->ray.dir_x = 0;
-		cub->ray.dir_y = -1;
+		cub->ray.dir_y = 1;
+		cub->ray.plane_x = 0.66;
+		cub->ray.plane_y = 0;
 	}
 }
 
 void	initialize_t_ray(t_cub *cub)
 {
 	set_dir(cub);
-	cub->ray.plane_x = 0;
-	cub->ray.plane_y = 0.66;
 	cub->ray.time = 0;
 	cub->ray.oldtime = 0;
 	cub->ray.step_x = 0;

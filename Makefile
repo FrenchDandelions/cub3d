@@ -1,5 +1,5 @@
-NAME = cub3d
-NAMEB = cub3d_bonus
+NAME = cub3D
+NAMEB = cub3D_bonus
 
 VERMILION_RED=\033[1;31m
 AZURE_BLUE=\033[1;34m
@@ -24,6 +24,7 @@ SRC_FILES = srcs/main/main.c \
 			srcs/parsing/rgb.c \
 			srcs/mlx/start.c \
 			srcs/mlx/free_objects.c \
+			srcs/mlx/move.c \
 			srcs/raycasting/raycast.c \
 
 SRC_BONUS = srcs_bonus/main/main.c \

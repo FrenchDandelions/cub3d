@@ -32,6 +32,7 @@
 # define GOLD 0xFFD700
 # define BLUE 0x0000FF
 # define GREEN 0x7CFC00
+# define PINK 0x1ABC9C
 # define ROT 0.2
 # define MOV 0.6
 
@@ -151,5 +152,9 @@ int					get_color(int *colors);
 void				init_mlx(t_cub *cub);
 void				free_and_exit(t_cub *cub);
 int					calculate_ray(t_cub *cub);
+void				move_up(t_cub *cub);
+void				move_down(t_cub *cub);
+void				move_left(t_cub *cub);
+void				move_right(t_cub *cub);
 
 #endif
