@@ -152,5 +152,9 @@ int					get_color(int *colors);
 void				init_mlx(t_cub *cub);
 void				free_and_exit(t_cub *cub);
 int					calculate_ray(t_cub *cub);
+void				move_up(t_cub *cub);
+void				move_down(t_cub *cub);
+void				move_left(t_cub *cub);
+void				move_right(t_cub *cub);
 
 #endif
