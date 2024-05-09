@@ -174,30 +174,36 @@ void	set_dir(t_cub *cub)
 	if (cub->pos.orientation == 'W')
 	{
 		cub->ray.dir_x = 0;
-		cub->ray.dir_y = 1;
+		cub->ray.dir_y = -1;
+		cub->ray.plane_x = 0.66;
+		cub->ray.plane_y = 0;
 	}
 	if (cub->pos.orientation == 'S')
 	{
 		cub->ray.dir_x = 1;
 		cub->ray.dir_y = 0;
+		cub->ray.plane_x = 0;
+		cub->ray.plane_y = 0.66;
 	}
 	if (cub->pos.orientation == 'N')
 	{
 		cub->ray.dir_x = -1;
 		cub->ray.dir_y = 0;
+		cub->ray.plane_x = 0;
+		cub->ray.plane_y = -0.66;
 	}
 	if (cub->pos.orientation == 'E')
 	{
 		cub->ray.dir_x = 0;
-		cub->ray.dir_y = -1;
+		cub->ray.dir_y = 1;
+		cub->ray.plane_x = -0.66;
+		cub->ray.plane_y = 0;
 	}
 }
 
 void	initialize_t_ray(t_cub *cub)
 {
 	set_dir(cub);
-	cub->ray.plane_x = 0;
-	cub->ray.plane_y = 0.66;
 	cub->ray.time = 0;
 	cub->ray.oldtime = 0;
 	cub->ray.step_x = 0;
