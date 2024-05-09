@@ -30,7 +30,7 @@ static t_map	*next_map(char *str, t_map **map)
 {
 	(*map)->next = malloc(sizeof(t_map));
 	if (!(*map)->next)
-		return (NULL);
+		return (ft_delete_list(&(*map)), NULL);
 	(*map)->next->prev = *map;
 	(*map)->next->line = str;
 	(*map)->next->next = NULL;
@@ -75,7 +75,7 @@ int	get_map(int fd, t_map **map, int *status, t_cub *cub)
 			return (ERR_MALLOC);
 	}
 	if (cub->size_list >= 100)
-		return(2);
+		return (2);
 	return (cub->size_list++, get_map(fd, map, status, cub));
 }
 

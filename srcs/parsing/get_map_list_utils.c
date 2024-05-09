@@ -24,6 +24,7 @@ void	ft_delete_list(t_map **map)
 		ft_memdel(*map);
 		*map = copy;
 	}
+	*map = NULL;
 }
 
 void	print_error_exit(char *err, t_cub *cub)
