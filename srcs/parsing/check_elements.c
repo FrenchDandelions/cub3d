@@ -57,20 +57,5 @@ static int	parse_map(char **map, int i, t_cub *cub)
 
 int	check_elements(t_cub *cub)
 {
-	// cub->img.north = mlx_xpm_file_to_image(cub->mlx_ptr,
-	// cub->img.north_texture,
-	// 		&cub->img.width, &cub->img.height);
-	// cub->img.south = mlx_xpm_file_to_image(cub->mlx_ptr,
-	// cub->img.south_texture,
-	// 		&cub->img.width, &cub->img.height);
-	// cub->img.east = mlx_xpm_file_to_image(cub->mlx_ptr,
-	// cub->img.east_texture,
-	// 		&cub->img.width, &cub->img.height);
-	// cub->img.west = mlx_xpm_file_to_image(cub->mlx_ptr,
-	// cub->img.west_texture,
-	// 		&cub->img.width, &cub->img.height);
-	// if (!cub->img.north || !cub->img.south || !cub->img.east
-	// || !cub->img.west)
-	// 	return (ERR_PARSING);
 	return (parse_map(cub->img.map, 0, cub));
 }

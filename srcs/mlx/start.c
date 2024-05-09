@@ -18,8 +18,6 @@ static int	handle_cross(t_cub *cub)
 	return (0);
 }
 
-#include <math.h>
-
 int	handle_key(int code, t_cub *cub)
 {
 	if (code == XK_Escape)
@@ -211,13 +209,18 @@ void	init_mlx(t_cub *cub)
 	if (!cub->mlx_win)
 		(free_all(cub), exit(2));
 	cub->img.img_floor = mlx_new_image(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT);
-	// cub->img.img_sky = mlx_new_image(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT
-	// / 2);
 	get_imgs(cub, cub->img.img_floor, get_color(cub->img.rgb_sky),
 		get_color(cub->img.rgb_floor));
-	// get_imgs(cub, cub->img.img_sky, get_color(cub->img.rgb_sky), MAP_HEIGHT
-	// 	/ 2);
-	// put_ray(cub, get_color(cub->img.rgb_sky), get_color(cub->img.rgb_floor));
+	cub->img.north = mlx_xpm_file_to_image(cub->mlx_ptr, cub->img.north_texture,
+			&cub->img.width, &cub->img.height);
+	cub->img.south = mlx_xpm_file_to_image(cub->mlx_ptr, cub->img.south_texture,
+			&cub->img.width, &cub->img.height);
+	cub->img.east = mlx_xpm_file_to_image(cub->mlx_ptr, cub->img.east_texture,
+			&cub->img.width, &cub->img.height);
+	cub->img.west = mlx_xpm_file_to_image(cub->mlx_ptr, cub->img.west_texture,
+			&cub->img.width, &cub->img.height);
+	if (!cub->img.north || !cub->img.south || !cub->img.east || !cub->img.west)
+		return (free_and_exit(cub));
 	initialize_t_ray(cub);
 	calculate_ray(cub);
 	mlx_hook(cub->mlx_win, KeyPress, KeyPressMask, &handle_key, cub);

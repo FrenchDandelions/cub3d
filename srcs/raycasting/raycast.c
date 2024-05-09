@@ -11,16 +11,13 @@
 /* ************************************************************************** */
 
 #include "cub3d.h"
-#include <math.h>
 
 void	draw_line(int x, t_cub *cub)
 {
 	cub->img.buffer = mlx_get_data_addr(cub->img.img_floor,
 			&cub->img.pixel_bits, &cub->img.line_bytes, &cub->img.endian);
-	// printf("ici %d\t%d\n", cub->ray.draw_start, cub->ray.draw_end);
 	while (cub->ray.draw_start <= cub->ray.draw_end)
 	{
-		// printf("loop %d\n", cub->ray.draw_start);
 		cub->img.pixel = (cub->ray.draw_start * cub->img.line_bytes) + (x * 4);
 		if (cub->img.endian == 0)
 		{
@@ -36,20 +33,14 @@ void	draw_line(int x, t_cub *cub)
 void	get_wall_dist(t_cub *cub)
 {
 	if (cub->ray.side == 0)
-	{
 		cub->ray.perp_wall_dist = cub->ray.side_dist_x - cub->ray.delta_dist_x;
-	}
 	else
-	{
 		cub->ray.perp_wall_dist = cub->ray.side_dist_y - cub->ray.delta_dist_y;
-	}
 	cub->ray.line_height = (int)(MAP_HEIGHT / cub->ray.perp_wall_dist);
 	cub->ray.draw_start = -cub->ray.line_height / 2 + MAP_HEIGHT / 2;
 	if (cub->ray.draw_start < 0)
 		cub->ray.draw_start = 0;
 	cub->ray.draw_end = cub->ray.line_height / 2 + MAP_HEIGHT / 2;
-	// printf("end %d\tlinehight %d\n", cub->ray.draw_end,
-	// cub->ray.line_height);
 	if (cub->ray.draw_end >= MAP_HEIGHT)
 		cub->ray.draw_end = MAP_HEIGHT - 1;
 	if (cub->ray.side == 1)
@@ -119,8 +110,6 @@ void	handle_step(t_cub *cub)
 
 void	calculate_delta(t_cub *cub)
 {
-	// printf("Here : ray_dir_x%f, ray_dir_y%f\n", cub->ray.ray_dir_x,
-	// cub->ray.ray_dir_y);
 	if (cub->ray.ray_dir_x == 0)
 		cub->ray.delta_dist_x = 1e30;
 	else
@@ -143,7 +132,6 @@ int	calculate_ray(t_cub *cub)
 			* cub->ray.cameraX;
 		cub->ray.ray_dir_y = cub->ray.dir_y + cub->ray.plane_y
 			* cub->ray.cameraX;
-		// printf("\t\t\t%f\t%f\n", cub->ray.ray_dir_x, cub->ray.ray_dir_y);
 		cub->ray.map_x = (int)cub->pos.start_y;
 		cub->ray.map_y = (int)cub->pos.start_x;
 		cub->ray.hit = 0;
@@ -152,7 +140,6 @@ int	calculate_ray(t_cub *cub)
 		digital_differential_analysis(cub);
 		get_wall_dist(cub);
 		draw_line(x, cub);
-		// printf("Here : %d\n", x);
 	}
 	mlx_put_image_to_window(cub->mlx_ptr, cub->mlx_win, cub->img.img_floor, 0,
 		0);

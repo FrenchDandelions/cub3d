@@ -17,6 +17,7 @@
 # include "../minilibx-linux/mlx.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
+# include <math.h>
 # include <sys/time.h>
 
 # define SUCCESS 7
@@ -156,5 +157,7 @@ void				move_up(t_cub *cub);
 void				move_down(t_cub *cub);
 void				move_left(t_cub *cub);
 void				move_right(t_cub *cub);
+void				rotate_left(t_cub *cub);
+void				rotate_right(t_cub *cub);
 
 #endif
