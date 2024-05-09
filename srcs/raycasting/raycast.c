@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:59:31 by thole             #+#    #+#             */
-/*   Updated: 2024/05/08 15:59:31 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/09 19:58:55 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@ void	get_wall_dist(t_cub *cub)
 	if (cub->ray.side == 1)
 	{
 		if (cub->ray.ray_dir_y > 0)
-			cub->ray.color = BLUE;
+			cub->ray.color = set_pixel_color(BLUE, cub);
 		else
-			cub->ray.color = GOLD;
+			cub->ray.color = set_pixel_color(GOLD, cub);
 	}
 	else
 	{
 		if (cub->ray.ray_dir_x > 0)
-			cub->ray.color = GREEN;
+			cub->ray.color = set_pixel_color(GREEN, cub);
 		else
-			cub->ray.color = PINK;
+			cub->ray.color = set_pixel_color(PINK, cub);
 	}
 }
 

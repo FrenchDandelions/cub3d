@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/07 13:56:31 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/09 20:04:43 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,10 @@
 # define BLUE 0x0000FF
 # define GREEN 0x7CFC00
 # define PINK 0x1ABC9C
+# define NORTH GREEN
+# define SOUTH PINK
+# define EAST GOLD
+# define WEST BLUE
 # define ROT 0.2
 # define MOV 0.6
 
@@ -119,6 +123,7 @@ typedef struct s_ray
 	double			old_plane_x;
 	double			frame_time;
 	int				color;
+	int				tex_y;
 }					t_ray;
 
 typedef struct s_cub
@@ -153,6 +158,7 @@ int					get_color(int *colors);
 void				init_mlx(t_cub *cub);
 void				free_and_exit(t_cub *cub);
 int					calculate_ray(t_cub *cub);
+int					set_pixel_color(int face, t_cub *cub);
 void				move_up(t_cub *cub);
 void				move_down(t_cub *cub);
 void				move_left(t_cub *cub);

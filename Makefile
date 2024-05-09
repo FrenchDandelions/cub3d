@@ -27,6 +27,7 @@ SRC_FILES = srcs/main/main.c \
 			srcs/mlx/move.c \
 			srcs/mlx/rotate.c \
 			srcs/raycasting/raycast.c \
+			srcs/raycasting/wall_raycasting.c \
 
 SRC_BONUS = srcs_bonus/main/main.c \
 			srcs_bonus/parsing/get_map_list.c \
@@ -46,7 +47,7 @@ DEPB = $(SRC_BONUS:.c=.d)
 
 INCLUDE = ./includes/cub3d.h ./libft/libft.h
 CC = cc
-CFLAGS = -Wall -Wextra -Werror -I -L$(LIB_DIR) -Ilibft -MMD -MP
+CFLAGS = -Wall -Wextra -Werror -I -L$(LIB_DIR) -Ilibft -MMD -MP -g
 LDFLAGS = -L./minilibx-linux/ -lmlx_Linux -lX11 -lXext -lm
 MLX_EX = $(MLX_FILE) $(LDFLAGS)
 

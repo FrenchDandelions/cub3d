@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:08:39 by thole             #+#    #+#             */
-/*   Updated: 2024/04/11 14:08:40 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/09 19:37:43 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ static void	initialize_struct(t_cub *cub)
 	cub->img.east = NULL;
 	cub->img.img_floor = NULL;
 	cub->img.img_sky = NULL;
-	cub->img.width = 64;
-	cub->img.height = 64;
+	cub->img.width = 32;
+	cub->img.height = 32;
 	cub->img.size_map = 0;
 	cub->img.endian = 0;
 	cub->size_list = 0;
