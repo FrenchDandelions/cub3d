@@ -188,16 +188,36 @@ void	initialize_t_ray(t_cub *cub)
 	cub->ray.step_y = 0;
 	cub->ray.move_speed = MOV;
 	cub->ray.rot_speed = ROT;
+	mlx_mouse_move(cub->mlx_ptr, cub->mlx_win, MAP_WIDTH / 2, MAP_HEIGHT / 2);
+	mlx_mouse_get_pos(cub->mlx_ptr, cub->mlx_win, &cub->m.x, &cub->m.y);
+	cub->pos.start_x += 0.2;
+	cub->pos.start_y += 0.2;
 }
 
 int	ray_loop(t_cub *cub)
 {
+	mlx_mouse_move(cub->mlx_ptr, cub->mlx_win, MAP_WIDTH / 2, MAP_HEIGHT / 2);
 	mlx_destroy_image(cub->mlx_ptr, cub->img.img_floor);
 	cub->img.img_floor = mlx_new_image(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT);
 	get_imgs(cub, cub->img.img_floor, get_color(cub->img.rgb_sky),
 		get_color(cub->img.rgb_floor));
 	calculate_ray(cub);
 	return (1);
+}
+
+int	handle_mouse(int x, int y, t_cub *cub)
+{
+	double	old_rot_speed;
+
+	(void)y;
+	old_rot_speed = cub->ray.rot_speed;
+	cub->ray.rot_speed /= 20;
+	if (x < MAP_WIDTH / 2)
+		rotate_left(cub);
+	else if (x > MAP_WIDTH / 2)
+		rotate_right(cub);
+	cub->ray.rot_speed = old_rot_speed;
+	return (0);
 }
 
 void	init_mlx(t_cub *cub)
@@ -225,6 +245,7 @@ void	init_mlx(t_cub *cub)
 	calculate_ray(cub);
 	mlx_hook(cub->mlx_win, KeyPress, KeyPressMask, &handle_key, cub);
 	mlx_hook(cub->mlx_win, 17, 0, &handle_cross, cub);
+	mlx_hook(cub->mlx_win, MotionNotify, PointerMotionMask, &handle_mouse, cub);
 	mlx_loop_hook(cub->mlx_ptr, &ray_loop, cub);
 	mlx_loop(cub->mlx_ptr);
 }

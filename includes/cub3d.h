@@ -35,7 +35,7 @@
 # define GREEN 0x7CFC00
 # define PINK 0x1ABC9C
 # define ROT 0.2
-# define MOV 0.6
+# define MOV 0.4
 
 typedef struct s_img
 {
@@ -121,6 +121,12 @@ typedef struct s_ray
 	int				color;
 }					t_ray;
 
+typedef struct s_mouse
+{
+	int				x;
+	int				y;
+}					t_mouse;
+
 typedef struct s_cub
 {
 	char			**initial_map;
@@ -133,6 +139,7 @@ typedef struct s_cub
 	t_img			img;
 	t_pos			pos;
 	t_ray			ray;
+	t_mouse			m;
 }					t_cub;
 
 bool				check_name_map(char *s);
