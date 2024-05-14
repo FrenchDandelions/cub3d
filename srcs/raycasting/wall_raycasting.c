@@ -14,22 +14,27 @@
 
 void	find_color(t_cub *cub)
 {
-	double tex_pos;
+	double	tex_pos;
 
-	tex_pos = (cub->ray.draw_start - MAP_HEIGHT / 2 + cub->ray.lh / 2) * cub->ray.step;
+	tex_pos = (cub->ray.draw_start - MAP_HEIGHT / 2 + cub->ray.lh / 2)
+		* cub->ray.step;
 	if (cub->ray.side == 1)
 	{
 		if (cub->ray.ray_dir_y > 0)
-			cub->ray.color = set_pixel_color(BLUE, cub, tex_pos, cub->ray.picked_img);
+			cub->ray.color = set_pixel_color(BLUE, cub, tex_pos,
+					cub->ray.picked_img);
 		else
-			cub->ray.color = set_pixel_color(GOLD, cub, tex_pos, cub->ray.picked_img);
+			cub->ray.color = set_pixel_color(GOLD, cub, tex_pos,
+					cub->ray.picked_img);
 	}
 	else
 	{
 		if (cub->ray.ray_dir_x > 0)
-			cub->ray.color = set_pixel_color(GREEN, cub, tex_pos, cub->ray.picked_img);
+			cub->ray.color = set_pixel_color(GREEN, cub, tex_pos,
+					cub->ray.picked_img);
 		else
-			cub->ray.color = set_pixel_color(PINK, cub, tex_pos, cub->ray.picked_img);
+			cub->ray.color = set_pixel_color(PINK, cub, tex_pos,
+					cub->ray.picked_img);
 	}
 }
 
@@ -57,18 +62,18 @@ static int	where_x_on_texture(int face, t_cub *cub, double wall_x)
 
 static int	get_pixel(t_cub *cub, char *img, int x, int y)
 {
-	return (*(int *)(img + (y * cub->img.ray_lb + x * \
-	(cub->img.ray_bpp / 8))));
+	return (*(int *)(img + (y * cub->img.ray_lb + x * (cub->img.ray_bpp / 8))));
 }
 
-int set_pixel_color(int face, t_cub *cub, double tex_pos, char *img)
+int	set_pixel_color(int face, t_cub *cub, double tex_pos, char *img)
 {
 	double	wall_x;
-	int	texture_x;
-	int	color;
+	int		texture_x;
+	int		color;
 
 	wall_x = where_wall_hit(face, cub);
 	texture_x = where_x_on_texture(face, cub, wall_x);
-	color = (get_pixel(cub, img, texture_x, (int) tex_pos & (cub->img.width - 1)));
+	color = (get_pixel(cub, img, texture_x, (int)tex_pos & (cub->img.width
+					- 1)));
 	return (color);
 }

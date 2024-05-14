@@ -181,5 +181,7 @@ void				move_left(t_cub *cub);
 void				move_right(t_cub *cub);
 void				rotate_left(t_cub *cub);
 void				rotate_right(t_cub *cub);
+void				handle_step(t_cub *cub);
+void				calculate_delta(t_cub *cub);
 
 #endif
