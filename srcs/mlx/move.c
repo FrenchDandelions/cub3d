@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   move.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:57:40 by thole             #+#    #+#             */
-/*   Updated: 2024/05/09 16:57:41 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/14 12:37:16 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,13 +43,13 @@ void	move_down(t_cub *cub)
 void	move_left(t_cub *cub)
 {
 	if (cub->img.map[(int)(cub->pos.start_y - cub->ray.dir_y
-			* cub->ray.move_speed)][(int)(cub->pos.start_x - cub->ray.dir_y
-			* cub->ray.move_speed)] != '1')
+			* cub->ray.move_speed)][(int)(cub->pos.start_x/*  - cub->ray.dir_y
+			* cub->ray.move_speed */)] != '1')
 	{
 		cub->pos.start_y -= cub->ray.dir_y * cub->ray.move_speed;
 	}
-	if (cub->img.map[(int)(cub->pos.start_y + cub->ray.dir_x
-			* cub->ray.move_speed)][(int)(cub->pos.start_x + cub->ray.dir_x
+	if (cub->img.map[(int)(cub->pos.start_y/*  + cub->ray.dir_x
+			* cub->ray.move_speed */)][(int)(cub->pos.start_x + cub->ray.dir_x
 			* cub->ray.move_speed)] != '1')
 	{
 		cub->pos.start_x += cub->ray.dir_x * cub->ray.move_speed;
@@ -59,13 +59,13 @@ void	move_left(t_cub *cub)
 void	move_right(t_cub *cub)
 {
 	if (cub->img.map[(int)(cub->pos.start_y + cub->ray.dir_y
-			* cub->ray.move_speed)][(int)(cub->pos.start_x + cub->ray.dir_y
-			* cub->ray.move_speed)] != '1')
+			* cub->ray.move_speed)][(int)(cub->pos.start_x/*  + cub->ray.dir_y
+			* cub->ray.move_speed */)] != '1')
 	{
 		cub->pos.start_y += cub->ray.dir_y * cub->ray.move_speed;
 	}
-	if (cub->img.map[(int)(cub->pos.start_y - cub->ray.dir_x
-			* cub->ray.move_speed)][(int)(cub->pos.start_x - cub->ray.dir_x
+	if (cub->img.map[(int)(cub->pos.start_y/*  - cub->ray.dir_x
+			* cub->ray.move_speed */)][(int)(cub->pos.start_x - cub->ray.dir_x
 			* cub->ray.move_speed)] != '1')
 	{
 		cub->pos.start_x -= cub->ray.dir_x * cub->ray.move_speed;
