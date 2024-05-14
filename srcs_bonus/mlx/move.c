@@ -43,12 +43,14 @@ void	move_down(t_cub *cub)
 void	move_left(t_cub *cub)
 {
 	if (cub->img.map[(int)(cub->pos.start_y - cub->ray.dir_y
-			* cub->ray.move_speed)][(int)cub->pos.start_x] != '1')
+			* cub->ray.move_speed)][(int)(cub->pos.start_x/*  - cub->ray.dir_y
+			* cub->ray.move_speed */)] != '1')
 	{
 		cub->pos.start_y -= cub->ray.dir_y * cub->ray.move_speed;
 	}
-	if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
-			+ cub->ray.dir_x * cub->ray.move_speed)] != '1')
+	if (cub->img.map[(int)(cub->pos.start_y/*  + cub->ray.dir_x
+			* cub->ray.move_speed */)][(int)(cub->pos.start_x + cub->ray.dir_x
+			* cub->ray.move_speed)] != '1')
 	{
 		cub->pos.start_x += cub->ray.dir_x * cub->ray.move_speed;
 	}
@@ -57,12 +59,14 @@ void	move_left(t_cub *cub)
 void	move_right(t_cub *cub)
 {
 	if (cub->img.map[(int)(cub->pos.start_y + cub->ray.dir_y
-			* cub->ray.move_speed)][(int)cub->pos.start_x] != '1')
+			* cub->ray.move_speed)][(int)(cub->pos.start_x/*  + cub->ray.dir_y
+			* cub->ray.move_speed */)] != '1')
 	{
 		cub->pos.start_y += cub->ray.dir_y * cub->ray.move_speed;
 	}
-	if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
-			- cub->ray.dir_x * cub->ray.move_speed)] != '1')
+	if (cub->img.map[(int)(cub->pos.start_y/*  - cub->ray.dir_x
+			* cub->ray.move_speed */)][(int)(cub->pos.start_x - cub->ray.dir_x
+			* cub->ray.move_speed)] != '1')
 	{
 		cub->pos.start_x -= cub->ray.dir_x * cub->ray.move_speed;
 	}

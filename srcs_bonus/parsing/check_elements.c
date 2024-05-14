@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_elements.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:30:42 by thole             #+#    #+#             */
-/*   Updated: 2024/04/16 15:30:43 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/07 13:57:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_starting_point(char c)
 static int	accepted_chars(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == '1' || c == '0'
-		|| c == ' ' || c == '2')
+		|| c == ' ')
 		return (1);
 	return (0);
 }
@@ -35,8 +35,8 @@ static int	parse_line(char *line, int i, int j, t_cub *cub)
 	{
 		if (cub->pos.orientation)
 			return (ERR_PARSING);
-		cub->pos.start_x = j;
-		cub->pos.start_y = i;
+		cub->pos.start_x = (double)j;
+		cub->pos.start_y = (double)i;
 		cub->pos.orientation = line[j];
 	}
 	if (!accepted_chars(line[j]))
@@ -57,20 +57,5 @@ static int	parse_map(char **map, int i, t_cub *cub)
 
 int	check_elements(t_cub *cub)
 {
-	// cub->img.north = mlx_xpm_file_to_image(cub->mlx_ptr,
-	// cub->img.north_texture,
-	// 		&cub->img.width, &cub->img.height);
-	// cub->img.south = mlx_xpm_file_to_image(cub->mlx_ptr,
-	// cub->img.south_texture,
-	// 		&cub->img.width, &cub->img.height);
-	// cub->img.east = mlx_xpm_file_to_image(cub->mlx_ptr,
-	// cub->img.east_texture,
-	// 		&cub->img.width, &cub->img.height);
-	// cub->img.west = mlx_xpm_file_to_image(cub->mlx_ptr,
-	// cub->img.west_texture,
-	// 		&cub->img.width, &cub->img.height);
-	// if (!cub->img.north || !cub->img.south || !cub->img.east
-	// || !cub->img.west)
-	// 	return (ERR_PARSING);
 	return (parse_map(cub->img.map, 0, cub));
 }

@@ -102,7 +102,7 @@ typedef struct s_ray
 	double			plane_y;
 	double			time;
 	double			oldtime;
-	double			cameraX;
+	double			camera_x;
 	double			width_screen;
 	double			ray_dir_x;
 	double			ray_dir_y;
@@ -173,7 +173,8 @@ void				init_mlx(t_cub *cub);
 void				free_and_exit(t_cub *cub);
 int					calculate_ray(t_cub *cub);
 void				find_color(t_cub *cub);
-int					set_pixel_color(int face, t_cub *cub, double tex_pos, char *img);
+int					set_pixel_color(int face, t_cub *cub, double tex_pos,
+						char *img);
 void				move_up(t_cub *cub);
 void				move_down(t_cub *cub);
 void				move_left(t_cub *cub);

@@ -40,23 +40,6 @@ static void	initialize_struct(t_cub *cub)
 	cub->status = 0;
 }
 
-void	print_map(t_cub *cub)
-{
-	printf("NO :%s\n", cub->img.north_texture);
-	printf("SO :%s\n", cub->img.south_texture);
-	printf("WE :%s\n", cub->img.west_texture);
-	printf("EA :%s\n", cub->img.east_texture);
-	printf("F :%s\n", cub->img.floor_color);
-	printf("C :%s\n", cub->img.sky_color);
-	if (cub->img.map)
-		for (int i = 0; cub->img.map[i]; i++)
-			printf("%s\n", cub->img.map[i]);
-	printf("Pos x: %f, Pos y : %f\n", cub->pos.start_y, cub->pos.start_x);
-	if (cub->pos.start_y != -1)
-		printf("Char postion : %c\n",
-			cub->img.map[(int)cub->pos.start_y][(int)cub->pos.start_x]);
-}
-
 void	free_all(t_cub *cub)
 {
 	ft_memdel(cub->img.north_texture);
@@ -72,12 +55,6 @@ void	free_all(t_cub *cub)
 	ft_memdel(cub->initial_map);
 	ft_memdel(cub->img.map);
 	ft_delete_list(&cub->map);
-}
-
-void	print_and_free_struct(t_cub *cub)
-{
-	print_map(cub);
-	free_all(cub);
 }
 
 void	print_err(int err)
@@ -96,18 +73,6 @@ void	print_err(int err)
 			"Error\nThe sky color isn't properly formatted\n");
 }
 
-void	print_map_list(t_cub *cub)
-{
-	t_map	*copy;
-
-	copy = cub->map;
-	while (copy)
-	{
-		printf("Coucou : %s\n", copy->line);
-		copy = copy->next;
-	}
-}
-
 int	main(int argc, char **argv)
 {
 	t_cub	cub;
@@ -121,7 +86,6 @@ int	main(int argc, char **argv)
 		status = create_map_list(argv[1], &cub);
 		if (status != SUCCESS && status != 0)
 			return (print_err(status), free_all(&cub), status);
-		// print_map_list(&cub);
 		status = check_elements(&cub);
 		if (status != SUCCESS)
 			return (print_err(status), free_all(&cub), status);
@@ -131,9 +95,7 @@ int	main(int argc, char **argv)
 		status = check_rgb(&cub);
 		if (status != SUCCESS)
 			return (print_err(status), free_all(&cub), status);
-		print_map(&cub);
 		init_mlx(&cub);
-		// free_all(&cub);
 		return (0);
 	}
 	else

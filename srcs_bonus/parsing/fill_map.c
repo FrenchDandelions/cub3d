@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:28:57 by thole             #+#    #+#             */
-/*   Updated: 2024/04/11 16:28:58 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/07 13:59:56 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,11 +46,11 @@ static int	checker(char **cub_str, int size, char *s)
 	char	*temp;
 
 	temp = ft_substr_cub3d(s, size, 0, *cub_str);
+	if (!temp)
+		return (ERR_MALLOC);
 	if (temp == *cub_str && temp)
 		return (2);
 	*cub_str = temp;
-	if (!*cub_str)
-		return (ERR_MALLOC);
 	if (!*cub_str[0])
 		return (2);
 	return (0);
@@ -77,12 +77,8 @@ static int	fill_texture(char *s, t_cub *cub)
 
 int	is_empty(t_cub *cub, int j, int i, char **map)
 {
-	// printf("Here : %s\n", map[i]);
 	if (!map[i][0] && j == 0 && !cub->img.map[j])
-	{
-		cub->status = fill_struct(cub, map, i + 1, j);
-		return (cub->status);
-	}
+		return (fill_struct(cub, map, i + 1, j));
 	else if (!map[i][0] && j > 0 && cub->img.map[j - 1])
 	{
 		cub->status = 2;
@@ -98,11 +94,8 @@ int	fill_struct(t_cub *cub, char **map, int i, int j)
 	if (!map[i] && !check_struct(cub, 0))
 		return (2);
 	else if (!map[i])
-	{
-		status = check_struct(cub, 1);
-		if (status)
+		if (check_struct(cub, 1))
 			return (SUCCESS);
-	}
 	if (is_texture(map[i]))
 	{
 		status = fill_texture(map[i], cub);
@@ -111,8 +104,9 @@ int	fill_struct(t_cub *cub, char **map, int i, int j)
 	}
 	else if (check_struct(cub, 2))
 	{
-		if (is_empty(cub, j, i, map) && cub->status)
-			return ((cub->status));
+		status = is_empty(cub, j, i, map);
+		if (status)
+			return (status);
 		cub->img.map[j] = map[i];
 		return (cub->img.map[j + 1] = NULL, fill_struct(cub, map, i + 1, j
 				+ 1));

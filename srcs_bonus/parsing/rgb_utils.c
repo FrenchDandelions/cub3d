@@ -30,9 +30,9 @@ int	ft_atoi_rgb(char *str, int *index, int *flag)
 			return (*flag = 1, -1);
 		(*index)++;
 	}
+	while (str[*index] && ft_is_whitespaces(str[*index]))
+		(*index)++;
 	if (str[*index] && str[*index] != ',')
 		return (*flag = 1, -1);
-	// if (str[*index])
-	// 	(*index)++;
 	return (num);
 }
