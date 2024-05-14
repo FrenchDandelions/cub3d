@@ -26,6 +26,9 @@ SRC_FILES = srcs/main/main.c \
 			srcs/mlx/free_objects.c \
 			srcs/mlx/move.c \
 			srcs/mlx/rotate.c \
+			srcs/mlx/key_utils.c \
+			srcs/mlx/init_values.c \
+			srcs/mlx/put_ray.c \
 			srcs/raycasting/raycast.c \
 			srcs/raycasting/wall_raycasting.c \
 
