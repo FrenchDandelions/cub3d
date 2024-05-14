@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/14 18:37:18 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/14 19:42:04 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -181,7 +181,14 @@ void				move_left(t_cub *cub);
 void				move_right(t_cub *cub);
 void				rotate_left(t_cub *cub);
 void				rotate_right(t_cub *cub);
+void				right_arrow(t_cub *cub);
+void				left_arrow(t_cub *cub);
 void				handle_step(t_cub *cub);
 void				calculate_delta(t_cub *cub);
+void				get_imgs(t_cub *cub, void *img, int color, int color2);
+int					handle_cross(t_cub *cub);
+int					handle_key(int code, t_cub *cub);
+int					handle_mouse(int x, int y, t_cub *cub);
+int					ray_loop(t_cub *cub);
 
 #endif
