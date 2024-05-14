@@ -6,36 +6,37 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:59:31 by thole             #+#    #+#             */
-/*   Updated: 2024/05/14 16:43:34 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/14 18:37:01 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static void	*pick_img_source(t_cub *cub)
+{
+	if (cub->ray.side == 0 && cub->ray.ray_dir_x < 0)
+		return (cub->img.south);
+	else if (cub->ray.side == 0 && cub->ray.ray_dir_x > 0)
+		return (cub->img.north);
+	else if (cub->ray.side == 1 && cub->ray.ray_dir_y > 0)
+		return (cub->img.west);
+	else if (cub->ray.side == 1 && cub->ray.ray_dir_y < 0)
+		return (cub->img.east);
+	return (NULL);
+}
+
 void	draw_line(int x, t_cub *cub)
 {
 	cub->img.buffer = mlx_get_data_addr(cub->img.img_floor,
 			&cub->img.pixel_bits, &cub->img.line_bytes, &cub->img.endian);
+	
+	cub->ray.lh = (int)(MAP_HEIGHT / cub->ray.tot_dist);
+	cub->ray.step = 1.0f * cub->img.width / cub->ray.lh;
+	cub->ray.picked_img = mlx_get_data_addr(pick_img_source(cub),
+	&cub->img.ray_bpp, &cub->img.ray_lb, &cub->img.ray_end);
 	while (cub->ray.draw_start <= cub->ray.draw_end)
 	{
-		if (cub->ray.side == 1)
-		{
-			if (cub->ray.ray_dir_y > 0)
-				cub->ray.color = set_pixel_color(BLUE, cub);
-				// cub->ray.color = BLUE;
-			else
-				cub->ray.color = set_pixel_color(GOLD, cub);
-				// cub->ray.color = GOLD;
-		}
-		else
-		{
-			if (cub->ray.ray_dir_x > 0)
-				cub->ray.color = set_pixel_color(GREEN, cub);
-				// cub->ray.color = GREEN;
-			else
-				cub->ray.color = set_pixel_color(PINK, cub);
-				// cub->ray.color = PINK;
-		}
+		find_color(cub);
 		cub->img.pixel = (cub->ray.draw_start * cub->img.line_bytes) + (x * 4);
 		if (cub->img.endian == 0)
 		{

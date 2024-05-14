@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/14 16:35:38 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/14 18:37:18 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -128,6 +128,9 @@ typedef struct s_ray
 	int				color;
 	int				tex_y;
 	double			tot_dist;
+	int				lh;
+	double			step;
+	char			*picked_img;
 }					t_ray;
 
 typedef struct s_cub
@@ -162,7 +165,8 @@ int					get_color(int *colors);
 void				init_mlx(t_cub *cub);
 void				free_and_exit(t_cub *cub);
 int					calculate_ray(t_cub *cub);
-int					set_pixel_color(int face, t_cub *cub);
+void				find_color(t_cub *cub);
+int					set_pixel_color(int face, t_cub *cub, double tex_pos, char *img);
 void				move_up(t_cub *cub);
 void				move_down(t_cub *cub);
 void				move_left(t_cub *cub);
