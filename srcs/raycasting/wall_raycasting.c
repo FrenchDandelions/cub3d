@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:02:16 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/14 13:18:49 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/14 17:17:45 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,14 +30,18 @@ static double	where_wall_hit(int face, t_cub *cub)
 	double	hit_x;
 
 	hit_x = 0;
-	if (face == EAST)
-		hit_x = cub->pos.start_x + cub->ray.perp_wall_dist * cub->ray.ray_dir_x;
-	else if (face == WEST)
-		hit_x = cub->pos.start_x - cub->ray.perp_wall_dist * cub->ray.ray_dir_x;
-	else if (face == NORTH)
-		hit_x = cub->pos.start_y + cub->ray.perp_wall_dist * cub->ray.ray_dir_y;
-	else if (face == SOUTH)
-		hit_x = cub->pos.start_y - cub->ray.perp_wall_dist * cub->ray.ray_dir_y;
+	// if (face == EAST)
+	// hit_x = cub->pos.start_x + cub->ray.perp_wall_dist * cub->ray.ray_dir_x;
+	// else if (face == WEST)
+	// hit_x = cub->pos.start_x - cub->ray.perp_wall_dist * cub->ray.ray_dir_x;
+	// else if (face == NORTH)
+	// hit_x = cub->pos.start_y + cub->ray.perp_wall_dist * cub->ray.ray_dir_y;
+	// else if (face == SOUTH)
+	// hit_x = cub->pos.start_y - cub->ray.perp_wall_dist * cub->ray.ray_dir_y;
+	if (face == EAST || face == WEST)
+		hit_x = cub->pos.start_x + cub->ray.tot_dist * cub->ray.ray_dir_x;
+	else
+		hit_x = cub->pos.start_y + cub->ray.tot_dist * cub->ray.ray_dir_y;
 	hit_x -= floor(hit_x);
 	return (hit_x);
 }
@@ -47,10 +51,7 @@ static int	where_x_on_texture(int face, t_cub *cub, double wall_x)
 	int	texture_x;
 
 	texture_x = (int)(wall_x * (double)cub->img.width);
-	if (face == EAST)
-		texture_x = cub->img.width - texture_x - 1;
-	else if (face == SOUTH)
-		texture_x = cub->img.width - texture_x - 1;
+	(void)face;
 	return (texture_x);
 }
 
@@ -60,24 +61,20 @@ static int	get_pixel(t_cub *cub, char *img, int x, int y)
 	(cub->img.ray_bpp / 8))));
 }
 
-int	set_pixel_color(int face, t_cub *cub)
+int set_pixel_color(int face, t_cub *cub)
 {
 	char	*img;
 	double	wall_x;
-	int		texture_x;
-	int		color;
-	int		a = 0, b = 0, c = 0;
+	int	texture_x;
+	int	color;
 
-	if (cub->ray.tex_y == 32)
-		cub->ray.tex_y = 0;
 	img = mlx_get_data_addr(pick_img_source(face, cub),
-			&cub->img.ray_bpp, &cub->img.ray_lb, &cub->img.ray_end);
+	&cub->img.ray_bpp, &cub->img.ray_lb, &cub->img.ray_end);
 	wall_x = where_wall_hit(face, cub);
 	texture_x = where_x_on_texture(face, cub, wall_x);
-	color = (get_pixel(cub, img, texture_x, cub->ray.tex_y));
-	cub->ray.tex_y+=1;
-	(void)a;
-	(void)b;
-	(void)c;
+	int line_height = (int)(MAP_HEIGHT / cub->ray.tot_dist);
+	double step = 1.0f * cub->img.width / line_height;
+	double tex_pos = (cub->ray.draw_start - MAP_HEIGHT / 2 + line_height / 2) * step;
+	color = (get_pixel(cub, img, texture_x, (int) tex_pos & (cub->img.width - 1)));
 	return (color);
 }

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:59:31 by thole             #+#    #+#             */
-/*   Updated: 2024/05/14 13:16:09 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:43:34 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ void	get_wall_dist(t_cub *cub)
 		cub->ray.perp_wall_dist = cub->ray.side_dist_x - cub->ray.delta_dist_x;
 	else
 		cub->ray.perp_wall_dist = cub->ray.side_dist_y - cub->ray.delta_dist_y;
+	cub->ray.tot_dist += cub->ray.perp_wall_dist;
 	cub->ray.line_height = (int)(MAP_HEIGHT / cub->ray.perp_wall_dist);
 	cub->ray.draw_start = -cub->ray.line_height / 2 + MAP_HEIGHT / 2;
 	if (cub->ray.draw_start < 0)
@@ -131,6 +132,7 @@ int	calculate_ray(t_cub *cub)
 	x = -1;
 	while (++x < MAP_WIDTH)
 	{
+		cub->ray.tot_dist = 0;
 		cub->ray.cameraX = 2 * x / (double)MAP_WIDTH - 1;
 		cub->ray.ray_dir_x = cub->ray.dir_x + cub->ray.plane_x
 			* cub->ray.cameraX;

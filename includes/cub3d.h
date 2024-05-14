@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/14 12:57:46 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/14 16:35:38 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,7 @@ typedef struct s_ray
 	double			frame_time;
 	int				color;
 	int				tex_y;
+	double			tot_dist;
 }					t_ray;
 
 typedef struct s_cub
