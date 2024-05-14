@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_list.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:58:09 by thole             #+#    #+#             */
-/*   Updated: 2024/04/17 15:58:10 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/07 13:50:46 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static t_map	*next_map(char *str, t_map **map)
 {
 	(*map)->next = malloc(sizeof(t_map));
 	if (!(*map)->next)
-		return (NULL);
+		return (ft_delete_list(&(*map)), NULL);
 	(*map)->next->prev = *map;
 	(*map)->next->line = str;
 	(*map)->next->next = NULL;
@@ -74,6 +74,8 @@ int	get_map(int fd, t_map **map, int *status, t_cub *cub)
 		if (!(*map))
 			return (ERR_MALLOC);
 	}
+	if (cub->size_list >= 100)
+		return (2);
 	return (cub->size_list++, get_map(fd, map, status, cub));
 }
 
@@ -87,7 +89,7 @@ int	create_map_list(char *map_name, t_cub *cub)
 	status = 0;
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-		print_error_exit("Error\nCouldn't open the map", cub);
+		print_error_exit("Error\nCouldn't open the map\n", cub);
 	map_list = NULL;
 	map = NULL;
 	if (get_map(fd, &map_list, &status, cub) != SUCCESS)

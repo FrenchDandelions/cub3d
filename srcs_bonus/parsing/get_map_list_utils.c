@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_map_list_utils.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:32:56 by thole             #+#    #+#             */
-/*   Updated: 2024/04/18 18:32:57 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/06 10:40:12 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,12 +24,14 @@ void	ft_delete_list(t_map **map)
 		ft_memdel(*map);
 		*map = copy;
 	}
+	*map = NULL;
 }
 
 void	print_error_exit(char *err, t_cub *cub)
 {
-	ft_dprintf(STDERR_FILENO, "%s\n", err);
+	ft_dprintf(STDERR_FILENO, "%s", err);
 	(void)cub;
+	exit(2);
 }
 
 int	list_to_map(t_map *map, t_cub *cub, char ***new_map, int i)
