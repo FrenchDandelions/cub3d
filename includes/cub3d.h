@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/09 20:04:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/14 12:57:46 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,9 @@ typedef struct s_img
 	int				line_bytes;
 	char			*buffer;
 	int				pixel;
+	int				ray_bpp;
+	int				ray_lb;
+	int				ray_end;
 }					t_img;
 
 /*
