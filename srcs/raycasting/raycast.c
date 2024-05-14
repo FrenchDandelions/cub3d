@@ -3,21 +3,40 @@
 /*                                                        :::      ::::::::   */
 /*   raycast.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:59:31 by thole             #+#    #+#             */
-/*   Updated: 2024/05/08 15:59:31 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/14 18:37:01 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+static void	*pick_img_source(t_cub *cub)
+{
+	if (cub->ray.side == 0 && cub->ray.ray_dir_x < 0)
+		return (cub->img.south);
+	else if (cub->ray.side == 0 && cub->ray.ray_dir_x > 0)
+		return (cub->img.north);
+	else if (cub->ray.side == 1 && cub->ray.ray_dir_y > 0)
+		return (cub->img.west);
+	else if (cub->ray.side == 1 && cub->ray.ray_dir_y < 0)
+		return (cub->img.east);
+	return (NULL);
+}
+
 void	draw_line(int x, t_cub *cub)
 {
 	cub->img.buffer = mlx_get_data_addr(cub->img.img_floor,
 			&cub->img.pixel_bits, &cub->img.line_bytes, &cub->img.endian);
+	
+	cub->ray.lh = (int)(MAP_HEIGHT / cub->ray.tot_dist);
+	cub->ray.step = 1.0f * cub->img.width / cub->ray.lh;
+	cub->ray.picked_img = mlx_get_data_addr(pick_img_source(cub),
+	&cub->img.ray_bpp, &cub->img.ray_lb, &cub->img.ray_end);
 	while (cub->ray.draw_start <= cub->ray.draw_end)
 	{
+		find_color(cub);
 		cub->img.pixel = (cub->ray.draw_start * cub->img.line_bytes) + (x * 4);
 		if (cub->img.endian == 0)
 		{
@@ -26,7 +45,7 @@ void	draw_line(int x, t_cub *cub)
 			cub->img.buffer[cub->img.pixel + 2] = (cub->ray.color >> 16) & 0xFF;
 			cub->img.buffer[cub->img.pixel + 3] = (cub->ray.color >> 24);
 		}
-		cub->ray.draw_start++;
+		cub->ray.draw_start += 1;
 	}
 }
 
@@ -36,6 +55,7 @@ void	get_wall_dist(t_cub *cub)
 		cub->ray.perp_wall_dist = cub->ray.side_dist_x - cub->ray.delta_dist_x;
 	else
 		cub->ray.perp_wall_dist = cub->ray.side_dist_y - cub->ray.delta_dist_y;
+	cub->ray.tot_dist += cub->ray.perp_wall_dist;
 	cub->ray.line_height = (int)(MAP_HEIGHT / cub->ray.perp_wall_dist);
 	cub->ray.draw_start = -cub->ray.line_height / 2 + MAP_HEIGHT / 2;
 	if (cub->ray.draw_start < 0)
@@ -43,20 +63,6 @@ void	get_wall_dist(t_cub *cub)
 	cub->ray.draw_end = cub->ray.line_height / 2 + MAP_HEIGHT / 2;
 	if (cub->ray.draw_end >= MAP_HEIGHT)
 		cub->ray.draw_end = MAP_HEIGHT - 1;
-	if (cub->ray.side == 1)
-	{
-		if (cub->ray.ray_dir_y > 0)
-			cub->ray.color = BLUE;
-		else
-			cub->ray.color = GOLD;
-	}
-	else
-	{
-		if (cub->ray.ray_dir_x > 0)
-			cub->ray.color = GREEN;
-		else
-			cub->ray.color = PINK;
-	}
 }
 
 void	digital_differential_analysis(t_cub *cub)
@@ -127,6 +133,7 @@ int	calculate_ray(t_cub *cub)
 	x = -1;
 	while (++x < MAP_WIDTH)
 	{
+		cub->ray.tot_dist = 0;
 		cub->ray.cameraX = 2 * x / (double)MAP_WIDTH - 1;
 		cub->ray.ray_dir_x = cub->ray.dir_x + cub->ray.plane_x
 			* cub->ray.cameraX;

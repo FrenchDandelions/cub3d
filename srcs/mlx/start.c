@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:29:16 by thole             #+#    #+#             */
-/*   Updated: 2024/05/06 11:19:52 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/09 19:51:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,6 +188,7 @@ void	initialize_t_ray(t_cub *cub)
 	cub->ray.step_y = 0;
 	cub->ray.move_speed = MOV;
 	cub->ray.rot_speed = ROT;
+	cub->ray.tex_y = 0000000000000000000;
 	mlx_mouse_move(cub->mlx_ptr, cub->mlx_win, MAP_WIDTH / 2, MAP_HEIGHT / 2);
 	mlx_mouse_get_pos(cub->mlx_ptr, cub->mlx_win, &cub->m.x, &cub->m.y);
 	cub->pos.start_x += 0.2;
