@@ -6,13 +6,13 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:29:16 by thole             #+#    #+#             */
-/*   Updated: 2024/05/14 19:26:20 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/14 19:40:50 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-static int	handle_cross(t_cub *cub)
+int	handle_cross(t_cub *cub)
 {
 	free_and_exit(cub);
 	return (0);
