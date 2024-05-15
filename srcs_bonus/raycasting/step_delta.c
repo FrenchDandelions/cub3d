@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   step_delta.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 19:17:14 by thole             #+#    #+#             */
-/*   Updated: 2024/05/14 19:17:15 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:09 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	handle_step(t_cub *cub)
 {

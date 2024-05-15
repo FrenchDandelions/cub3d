@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_file_name.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 16:04:07 by thole             #+#    #+#             */
-/*   Updated: 2024/04/11 16:04:08 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 bool	check_name_map(char *s)
 {

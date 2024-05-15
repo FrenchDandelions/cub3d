@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   cub3d_bonus.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 14:13:05 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:16:18 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,19 @@
 # define WEST BLUE
 # define ROT 0.2
 # define MOV 0.4
+# define DOOR_NUMBER 11
+# define DNBR DOOR_NUMBER
+# define DOOR_ZERO "./assets/doors/door0.xpm"
+# define DOOR_ONE "./assets/doors/door1.xpm"
+# define DOOR_TWO "./assets/doors/door2.xpm"
+# define DOOR_THREE "./assets/doors/door3.xpm"
+# define DOOR_FOUR "./assets/doors/door4.xpm"
+# define DOOR_FIVE "./assets/doors/door5.xpm"
+# define DOOR_SIX "./assets/doors/door6.xpm"
+# define DOOR_SEVEN "./assets/doors/door7.xpm"
+# define DOOR_EIGHT "./assets/doors/door8.xpm"
+# define DOOR_NINE "./assets/doors/door9.xpm"
+# define DOOR_TEN "./assets/doors/door10.xpm"
 
 typedef struct s_img
 {
@@ -69,6 +82,9 @@ typedef struct s_img
 	int				ray_bpp;
 	int				ray_lb;
 	int				ray_end;
+	void			*curr_door;
+	void			*doors[DOOR_NUMBER];
+	bool			is_animating;
 }					t_img;
 
 /*
@@ -137,20 +153,7 @@ typedef struct s_mouse
 {
 	int				x;
 	int				y;
-	int				show;
 }					t_mouse;
-
-typedef struct s_minimap
-{
-	size_t			size_map;
-	size_t			max_len;
-	int				impossible;
-	int				show;
-	int				color_wall;
-	int				color_player;
-	int				color_floor;
-	int				cl_pk;
-}					t_minimap;
 
 typedef struct s_cub
 {
@@ -165,13 +168,19 @@ typedef struct s_cub
 	t_pos			pos;
 	t_ray			ray;
 	t_mouse			m;
-	t_minimap		mmap;
+	size_t			timestamp;
+	size_t			timestamp2;
+	int				frame;
+	int				pos_x;
+	int				pos_y;
+	int				order;
 }					t_cub;
 
 bool				check_name_map(char *s);
 int					fill_struct(t_cub *cub, char **map, int i, int j);
 char				*ft_substr_cub3d(char *s, int start, int index, char *str);
 int					is_texture(char *s);
+void				print_map(t_cub *cub);
 void				free_all(t_cub *cub);
 int					check_elements(t_cub *cub);
 int					check_access(char **map, int size_map, int i);
@@ -203,9 +212,14 @@ int					handle_cross(t_cub *cub);
 int					handle_key(int code, t_cub *cub);
 int					handle_mouse(int x, int y, t_cub *cub);
 int					ray_loop(t_cub *cub);
-void				initialize_minimap_values(t_cub *cub);
-void				change_mmap_values(t_cub *cub);
-void				change_mouse_values(t_cub *cub);
-void				add_mmap(t_cub *cub);
+void				*init_img(t_cub *cub, char *texture_path);
+void				init_doors(t_cub *cub);
+void				free_image(void **image, t_cub *cub);
+void				free_doors(t_cub *cub);
+void				space_bar(t_cub *cub);
+size_t				get_current_time(void);
+void				check_animation(t_cub *cub, int order);
+void				anima(t_cub *cub, int pos_y, int pos_x);
+void				reverse_anima(t_cub *cub, int pos_y, int pos_x);
 
 #endif

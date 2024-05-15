@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   check_access.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 19:55:46 by thole             #+#    #+#             */
-/*   Updated: 2024/04/16 19:55:47 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/15 14:09:32 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 static int	len(char *s)
 {
@@ -40,7 +40,7 @@ static int	check_line(char **map, int i, int j, int size_map)
 {
 	if (!map[i][j])
 		return (0);
-	if (map[i][j] == '0' || is_player(map[i][j]))
+	if (map[i][j] == '0' || is_player(map[i][j]) || map[i][j] == '2')
 		if (check_if_out_of_bounds(map, i, j, size_map) == FAILURE)
 			return (1);
 	return (check_line(map, i, j + 1, size_map));

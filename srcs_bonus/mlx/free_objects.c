@@ -6,11 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:03:16 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/06 11:04:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:13:46 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	free_image(void **image, t_cub *cub)
 {
@@ -22,6 +22,7 @@ void	free_image(void **image, t_cub *cub)
 void	free_and_exit(t_cub *cub)
 {
 	mlx_loop_end(cub->mlx_ptr);
+	free_doors(cub);
 	free_image(&cub->img.north, cub);
 	free_image(&cub->img.south, cub);
 	free_image(&cub->img.east, cub);
