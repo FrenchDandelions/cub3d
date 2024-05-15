@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 19:12:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/14 19:30:19 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 12:44:43 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	init_mlx(t_cub *cub)
 {
 	cub->mlx_ptr = mlx_init();
 	if (!cub->mlx_ptr)
-		(free_all(cub), exit(2));
+		(free_all(cub), write(2, "Error\nMissing env\n", 19), exit(2));
 	cub->mlx_win = mlx_new_window(cub->mlx_ptr, MAP_WIDTH, MAP_HEIGHT, "cub3d");
 	if (!cub->mlx_win)
 		(free_all(cub), exit(2));
