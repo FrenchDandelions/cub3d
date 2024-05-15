@@ -6,12 +6,12 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 19:16:18 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:27:20 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef CUB3D_BONUS_H
+# define CUB3D_BONUS_H
 
 # include "../libft/libft.h"
 # include "../minilibx-linux/mlx.h"
