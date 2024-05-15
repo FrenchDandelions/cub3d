@@ -24,7 +24,7 @@
 # define FAILURE 0
 # define ERR_MALLOC -2
 # define ERR_PARSING 2
-# define MAP_ERR "Error\nThe map isn't properly formatted\n"
+# define MAP_ERR "Error\nThe map isn't properly formatted"
 # define ERR_CLR_F -7
 # define ERR_CLR_S -8
 # define MAP_HEIGHT 1080
@@ -137,7 +137,20 @@ typedef struct s_mouse
 {
 	int				x;
 	int				y;
+	int				show;
 }					t_mouse;
+
+typedef struct s_minimap
+{
+	size_t			size_map;
+	size_t			max_len;
+	int				impossible;
+	int				show;
+	int				color_wall;
+	int				color_player;
+	int				color_floor;
+	int				cl_pk;
+}					t_minimap;
 
 typedef struct s_cub
 {
@@ -152,13 +165,13 @@ typedef struct s_cub
 	t_pos			pos;
 	t_ray			ray;
 	t_mouse			m;
+	t_minimap		mmap;
 }					t_cub;
 
 bool				check_name_map(char *s);
 int					fill_struct(t_cub *cub, char **map, int i, int j);
 char				*ft_substr_cub3d(char *s, int start, int index, char *str);
 int					is_texture(char *s);
-void				print_map(t_cub *cub);
 void				free_all(t_cub *cub);
 int					check_elements(t_cub *cub);
 int					check_access(char **map, int size_map, int i);
@@ -190,5 +203,9 @@ int					handle_cross(t_cub *cub);
 int					handle_key(int code, t_cub *cub);
 int					handle_mouse(int x, int y, t_cub *cub);
 int					ray_loop(t_cub *cub);
+void				initialize_minimap_values(t_cub *cub);
+void				change_mmap_values(t_cub *cub);
+void				change_mouse_values(t_cub *cub);
+void				add_mmap(t_cub *cub);
 
 #endif

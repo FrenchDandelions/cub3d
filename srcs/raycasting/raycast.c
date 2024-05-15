@@ -107,6 +107,7 @@ int	calculate_ray(t_cub *cub)
 		get_wall_dist(cub);
 		draw_line(x, cub);
 	}
+	add_mmap(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->mlx_win, cub->img.img_floor, 0,
 		0);
 	return (0);

@@ -22,6 +22,8 @@ SRC_FILES = srcs/main/main.c \
 			srcs/parsing/fill_map_utils.c \
 			srcs/parsing/rgb_utils.c \
 			srcs/parsing/rgb.c \
+			srcs/minimap/add_mmap.c \
+			srcs/minimap/minimap.c \
 			srcs/mlx/start.c \
 			srcs/mlx/free_objects.c \
 			srcs/mlx/move.c \
