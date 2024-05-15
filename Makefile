@@ -43,12 +43,17 @@ SRC_BONUS = srcs_bonus/main/main.c \
 			srcs_bonus/parsing/fill_map_utils.c \
 			srcs_bonus/parsing/rgb_utils.c \
 			srcs_bonus/parsing/rgb.c \
+			srcs_bonus/mlx/doors_mlx.c \
 			srcs_bonus/mlx/start.c \
 			srcs_bonus/mlx/free_objects.c \
 			srcs_bonus/mlx/move.c \
 			srcs_bonus/mlx/rotate.c \
+			srcs_bonus/mlx/key_utils.c \
+			srcs_bonus/mlx/init_values.c \
+			srcs_bonus/mlx/put_ray.c \
 			srcs_bonus/raycasting/raycast.c \
 			srcs_bonus/raycasting/step_delta.c \
+			srcs_bonus/raycasting/time.c \
 			srcs_bonus/raycasting/wall_raycasting.c \
 
 OBJECTS = $(SRC_FILES:.c=.o)
