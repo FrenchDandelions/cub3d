@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:59:31 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 18:39:38 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:01:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@ static void	*pick_img_source(t_cub *cub)
 		else if (cub->ray.side == 1 && cub->ray.ray_dir_y < 0)
 			return (cub->img.east);
 	}
-	else
+	else if (cub->ray.hit == 2)
+		return (cub->img.doors[0]);
+	else if (cub->ray.hit == 3)
 		return (cub->img.curr_door);
 	return (NULL);
 }
@@ -89,6 +91,8 @@ void	digital_differential_analysis(t_cub *cub)
 			cub->ray.hit = 1;
 		else if (cub->img.map[cub->ray.map_x][cub->ray.map_y] == '2')
 			cub->ray.hit = 2;
+		else if (cub->img.map[cub->ray.map_x][cub->ray.map_y] == '4')
+			cub->ray.hit = 3;
 	}
 }
 

@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:45:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/15 18:41:19 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:06:23 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,6 +80,7 @@ void check_animation(t_cub *cub, int order)
 		{
 			cub->img.is_animating = 0;
 			cub->img.curr_door = cub->img.doors[0];
+			cub->img.map[cub->pos_y][cub->pos_x] = '2';
 		}
 		if(get_current_time() - cub->timestamp2 >= 100 && cub->frame >= 0)
 		{
@@ -94,22 +95,24 @@ void	anima(t_cub *cub, int pos_y, int pos_x)
 	cub->timestamp = get_current_time();
 	cub->timestamp2 = get_current_time();
 	cub->frame = 1;
-	cub->img.is_animating = 1;
 	cub->pos_x = pos_x;
 	cub->pos_y = pos_y;
+	cub->img.curr_door = cub->img.doors[cub->frame++];
+	cub->img.map[cub->pos_y][cub->pos_x] = '4';
+	cub->img.is_animating = 1;
 	cub->order = 0;
 }
 
 void	reverse_anima(t_cub *cub, int pos_y, int pos_x)
 {
-	cub->img.map[cub->pos_y][cub->pos_x] = '2';
+	cub->pos_x = pos_x;
+	cub->pos_y = pos_y;
+	cub->img.map[cub->pos_y][cub->pos_x] = '4';
 	cub->timestamp = get_current_time();
 	cub->timestamp2 = get_current_time();
 	cub->frame = 10;
 	cub->img.curr_door = cub->img.doors[cub->frame--];
 	cub->img.is_animating = 1;
-	cub->pos_x = pos_x;
-	cub->pos_y = pos_y;
 	cub->order = 1;
 }
 
