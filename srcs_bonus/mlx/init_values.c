@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 19:12:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/15 14:48:14 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:36:43 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ static void	initialize_t_ray(t_cub *cub)
 	mlx_mouse_get_pos(cub->mlx_ptr, cub->mlx_win, &cub->m.x, &cub->m.y);
 	cub->pos.start_x += 0.2;
 	cub->pos.start_y += 0.2;
+	initialize_minimap_values(cub);
 }
 
 void	*init_img(t_cub *cub, char *texture_path)

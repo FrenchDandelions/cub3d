@@ -36,6 +36,8 @@ SRC_FILES = srcs/main/main.c \
 			srcs/raycasting/wall_raycasting.c \
 
 SRC_BONUS = srcs_bonus/main/main.c \
+			srcs_bonus/minimap/add_mmap.c \
+			srcs_bonus/minimap/minimap.c \
 			srcs_bonus/parsing/get_map_list.c \
 			srcs_bonus/parsing/get_map_list_utils.c \
 			srcs_bonus/parsing/check_access.c \

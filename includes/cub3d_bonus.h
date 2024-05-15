@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 19:27:20 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:36:59 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -153,7 +153,23 @@ typedef struct s_mouse
 {
 	int				x;
 	int				y;
+	int				show;
 }					t_mouse;
+
+typedef struct s_minimap
+{
+	size_t			size_map;
+	size_t			max_len;
+	int				impossible;
+	int				show;
+	int				color_wall;
+	int				color_player;
+	int				color_floor;
+	int				cl_pk;
+	int				color_door_open;
+	int				color_door_closed;
+	int				color_door_animation;
+}					t_minimap;
 
 typedef struct s_cub
 {
@@ -174,6 +190,7 @@ typedef struct s_cub
 	int				pos_x;
 	int				pos_y;
 	int				order;
+	t_minimap		mmap;
 }					t_cub;
 
 bool				check_name_map(char *s);
@@ -221,5 +238,9 @@ size_t				get_current_time(void);
 void				check_animation(t_cub *cub, int order);
 void				anima(t_cub *cub, int pos_y, int pos_x);
 void				reverse_anima(t_cub *cub, int pos_y, int pos_x);
+void				initialize_minimap_values(t_cub *cub);
+void				change_mmap_values(t_cub *cub);
+void				change_mouse_values(t_cub *cub);
+void				add_mmap(t_cub *cub);
 
 #endif

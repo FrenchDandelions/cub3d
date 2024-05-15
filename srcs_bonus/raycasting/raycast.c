@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:59:31 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 19:01:23 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:37:24 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,7 @@ int	calculate_ray(t_cub *cub)
 		get_wall_dist(cub);
 		draw_line(x, cub);
 	}
+	add_mmap(cub);
 	mlx_put_image_to_window(cub->mlx_ptr, cub->mlx_win, cub->img.img_floor, 0,
 		0);
 	return (0);
