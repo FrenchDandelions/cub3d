@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 19:02:16 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/14 18:37:04 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 11:36:58 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,8 @@ static int	where_x_on_texture(int face, t_cub *cub, double wall_x)
 	int	texture_x;
 
 	texture_x = (int)(wall_x * (double)cub->img.width);
+	if (face == EAST || face == NORTH)
+		return ((double)cub->img.width - texture_x - 1);
 	(void)face;
 	return (texture_x);
 }
