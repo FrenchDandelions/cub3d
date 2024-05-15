@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   rgb.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 16:28:26 by thole             #+#    #+#             */
-/*   Updated: 2024/04/21 16:28:27 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:09 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 int	get_color(int *colors)
 {

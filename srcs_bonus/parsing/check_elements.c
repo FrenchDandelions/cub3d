@@ -6,11 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:30:42 by thole             #+#    #+#             */
-/*   Updated: 2024/05/07 13:57:08 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:07 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 static int	is_starting_point(char c)
 {

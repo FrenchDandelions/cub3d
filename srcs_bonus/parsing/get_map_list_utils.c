@@ -6,11 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:32:56 by thole             #+#    #+#             */
-/*   Updated: 2024/05/06 10:40:12 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 void	ft_delete_list(t_map **map)
 {

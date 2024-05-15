@@ -6,11 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/06 11:03:16 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/06 11:04:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:05 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	free_image(void **image, t_cub *cub)
 {

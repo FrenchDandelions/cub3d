@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   fill_map_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 17:01:25 by thole             #+#    #+#             */
-/*   Updated: 2024/04/11 17:01:27 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:08 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 int	is_texture(char *s)
 {

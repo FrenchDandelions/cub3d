@@ -6,11 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:08:39 by thole             #+#    #+#             */
-/*   Updated: 2024/05/09 19:37:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:04 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/cub3d.h"
+#include "../includes/cub3d_bonus.h"
 
 static void	initialize_struct(t_cub *cub)
 {

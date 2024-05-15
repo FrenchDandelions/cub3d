@@ -6,11 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:57:40 by thole             #+#    #+#             */
-/*   Updated: 2024/05/14 17:50:45 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 13:59:06 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "cub3d.h"
+#include "cub3d_bonus.h"
 
 void	move_up(t_cub *cub)
 {
@@ -20,7 +20,7 @@ void	move_up(t_cub *cub)
 		cub->pos.start_y += cub->ray.dir_x * cub->ray.move_speed;
 	}
 	if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
-			+ cub->ray.dir_y * cub->ray.move_speed)] != '1')
+		+ cub->ray.dir_y * cub->ray.move_speed)] != '1')
 	{
 		cub->pos.start_x += cub->ray.dir_y * cub->ray.move_speed;
 	}
@@ -34,7 +34,7 @@ void	move_down(t_cub *cub)
 		cub->pos.start_y -= cub->ray.dir_x * cub->ray.move_speed;
 	}
 	if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
-			- cub->ray.dir_y * cub->ray.move_speed)] != '1')
+		- cub->ray.dir_y * cub->ray.move_speed)] != '1')
 	{
 		cub->pos.start_x -= cub->ray.dir_y * cub->ray.move_speed;
 	}
@@ -48,7 +48,7 @@ void	move_left(t_cub *cub)
 		cub->pos.start_y -= cub->ray.dir_y * cub->ray.move_speed;
 	}
 	if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
-			+ cub->ray.dir_x * cub->ray.move_speed)] != '1')
+		+ cub->ray.dir_x * cub->ray.move_speed)] != '1')
 	{
 		cub->pos.start_x += cub->ray.dir_x * cub->ray.move_speed;
 	}
@@ -62,7 +62,7 @@ void	move_right(t_cub *cub)
 		cub->pos.start_y += cub->ray.dir_y * cub->ray.move_speed;
 	}
 	if (cub->img.map[(int)cub->pos.start_y][(int)(cub->pos.start_x
-			- cub->ray.dir_x * cub->ray.move_speed)] != '1')
+		- cub->ray.dir_x * cub->ray.move_speed)] != '1')
 	{
 		cub->pos.start_x -= cub->ray.dir_x * cub->ray.move_speed;
 	}
