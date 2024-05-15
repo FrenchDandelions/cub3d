@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 18:34:57 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 19:16:18 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@
 # define ROT 0.2
 # define MOV 0.4
 # define DOOR_NUMBER 11
+# define DNBR DOOR_NUMBER
 # define DOOR_ZERO "./assets/doors/door0.xpm"
 # define DOOR_ONE "./assets/doors/door1.xpm"
 # define DOOR_TWO "./assets/doors/door2.xpm"
@@ -218,5 +219,7 @@ void				free_doors(t_cub *cub);
 void				space_bar(t_cub *cub);
 size_t				get_current_time(void);
 void				check_animation(t_cub *cub, int order);
+void				anima(t_cub *cub, int pos_y, int pos_x);
+void				reverse_anima(t_cub *cub, int pos_y, int pos_x);
 
 #endif

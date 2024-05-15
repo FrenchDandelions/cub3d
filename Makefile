@@ -43,6 +43,7 @@ SRC_BONUS = srcs_bonus/main/main.c \
 			srcs_bonus/parsing/fill_map_utils.c \
 			srcs_bonus/parsing/rgb_utils.c \
 			srcs_bonus/parsing/rgb.c \
+			srcs_bonus/mlx/animation.c \
 			srcs_bonus/mlx/doors_mlx.c \
 			srcs_bonus/mlx/start.c \
 			srcs_bonus/mlx/free_objects.c \
