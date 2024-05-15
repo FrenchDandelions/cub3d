@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:08:39 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 13:59:04 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:58:43 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 static void	initialize_struct(t_cub *cub)
 {
+	ft_bzero(&cub->img, sizeof(t_img));
 	cub->img.map = NULL;
 	cub->initial_map = NULL;
 	cub->past_string = NULL;

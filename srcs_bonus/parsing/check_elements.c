@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/16 15:30:42 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 13:59:07 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 14:09:06 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ static int	is_starting_point(char c)
 static int	accepted_chars(char c)
 {
 	if (c == 'N' || c == 'S' || c == 'E' || c == 'W' || c == '1' || c == '0'
-		|| c == ' ')
+		|| c == ' ' || c == '2')
 		return (1);
 	return (0);
 }

@@ -6,11 +6,11 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/28 16:40:44 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 13:59:10 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:20:48 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "./includes/cub3d_bonus.h"
+#include "cub3d_bonus.h"
 
 size_t	get_current_time(void)
 {

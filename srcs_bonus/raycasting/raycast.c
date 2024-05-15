@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/08 15:59:31 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 13:59:09 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:39:38 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 
 static void	*pick_img_source(t_cub *cub)
 {
-	if (cub->ray.side == 0 && cub->ray.ray_dir_x < 0)
-		return (cub->img.south);
-	else if (cub->ray.side == 0 && cub->ray.ray_dir_x > 0)
-		return (cub->img.north);
-	else if (cub->ray.side == 1 && cub->ray.ray_dir_y > 0)
-		return (cub->img.west);
-	else if (cub->ray.side == 1 && cub->ray.ray_dir_y < 0)
-		return (cub->img.east);
+	if (cub->ray.hit == 1)
+	{
+		if (cub->ray.side == 0 && cub->ray.ray_dir_x < 0)
+			return (cub->img.south);
+		else if (cub->ray.side == 0 && cub->ray.ray_dir_x > 0)
+			return (cub->img.north);
+		else if (cub->ray.side == 1 && cub->ray.ray_dir_y > 0)
+			return (cub->img.west);
+		else if (cub->ray.side == 1 && cub->ray.ray_dir_y < 0)
+			return (cub->img.east);
+	}
+	else
+		return (cub->img.curr_door);
 	return (NULL);
 }
 
@@ -82,6 +87,8 @@ void	digital_differential_analysis(t_cub *cub)
 		}
 		if (cub->img.map[cub->ray.map_x][cub->ray.map_y] == '1')
 			cub->ray.hit = 1;
+		else if (cub->img.map[cub->ray.map_x][cub->ray.map_y] == '2')
+			cub->ray.hit = 2;
 	}
 }
 
@@ -90,6 +97,7 @@ int	calculate_ray(t_cub *cub)
 	int	x;
 
 	x = -1;
+	check_animation(cub, cub->order);
 	while (++x < MAP_WIDTH)
 	{
 		cub->ray.tot_dist = 0;

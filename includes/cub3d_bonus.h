@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 14:13:09 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 18:34:57 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,18 @@
 # define WEST BLUE
 # define ROT 0.2
 # define MOV 0.4
+# define DOOR_NUMBER 11
+# define DOOR_ZERO "./assets/doors/door0.xpm"
+# define DOOR_ONE "./assets/doors/door1.xpm"
+# define DOOR_TWO "./assets/doors/door2.xpm"
+# define DOOR_THREE "./assets/doors/door3.xpm"
+# define DOOR_FOUR "./assets/doors/door4.xpm"
+# define DOOR_FIVE "./assets/doors/door5.xpm"
+# define DOOR_SIX "./assets/doors/door6.xpm"
+# define DOOR_SEVEN "./assets/doors/door7.xpm"
+# define DOOR_EIGHT "./assets/doors/door8.xpm"
+# define DOOR_NINE "./assets/doors/door9.xpm"
+# define DOOR_TEN "./assets/doors/door10.xpm"
 
 typedef struct s_img
 {
@@ -69,6 +81,9 @@ typedef struct s_img
 	int				ray_bpp;
 	int				ray_lb;
 	int				ray_end;
+	void			*curr_door;
+	void			*doors[DOOR_NUMBER];
+	bool			is_animating;
 }					t_img;
 
 /*
@@ -152,6 +167,12 @@ typedef struct s_cub
 	t_pos			pos;
 	t_ray			ray;
 	t_mouse			m;
+	size_t			timestamp;
+	size_t			timestamp2;
+	int				frame;
+	int				pos_x;
+	int				pos_y;
+	int				order;
 }					t_cub;
 
 bool				check_name_map(char *s);
@@ -190,5 +211,12 @@ int					handle_cross(t_cub *cub);
 int					handle_key(int code, t_cub *cub);
 int					handle_mouse(int x, int y, t_cub *cub);
 int					ray_loop(t_cub *cub);
+void				*init_img(t_cub *cub, char *texture_path);
+void				init_doors(t_cub *cub);
+void				free_image(void **image, t_cub *cub);
+void				free_doors(t_cub *cub);
+void				space_bar(t_cub *cub);
+size_t				get_current_time(void);
+void				check_animation(t_cub *cub, int order);
 
 #endif

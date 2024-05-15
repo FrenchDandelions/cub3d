@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/21 18:29:16 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 13:59:07 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/15 15:25:37 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ int	handle_key(int code, t_cub *cub)
 	{
 		left_arrow(cub);
 	}
+	else if (code == XK_space)
+		space_bar(cub);
 	return (0);
 }
 
