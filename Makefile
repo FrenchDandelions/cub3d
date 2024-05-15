@@ -26,7 +26,11 @@ SRC_FILES = srcs/main/main.c \
 			srcs/mlx/free_objects.c \
 			srcs/mlx/move.c \
 			srcs/mlx/rotate.c \
+			srcs/mlx/key_utils.c \
+			srcs/mlx/init_values.c \
+			srcs/mlx/put_ray.c \
 			srcs/raycasting/raycast.c \
+			srcs/raycasting/step_delta.c \
 			srcs/raycasting/wall_raycasting.c \
 
 SRC_BONUS = srcs_bonus/main/main.c \
@@ -39,6 +43,13 @@ SRC_BONUS = srcs_bonus/main/main.c \
 			srcs_bonus/parsing/fill_map_utils.c \
 			srcs_bonus/parsing/rgb_utils.c \
 			srcs_bonus/parsing/rgb.c \
+			srcs_bonus/mlx/start.c \
+			srcs_bonus/mlx/free_objects.c \
+			srcs_bonus/mlx/move.c \
+			srcs_bonus/mlx/rotate.c \
+			srcs_bonus/raycasting/raycast.c \
+			srcs_bonus/raycasting/step_delta.c \
+			srcs_bonus/raycasting/wall_raycasting.c \
 
 OBJECTS = $(SRC_FILES:.c=.o)
 DEP = $(SRC_FILES:.c=.d)
