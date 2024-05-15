@@ -74,7 +74,7 @@ int	get_map(int fd, t_map **map, int *status, t_cub *cub)
 		if (!(*map))
 			return (ERR_MALLOC);
 	}
-	if (cub->size_list >= 100)
+	if (cub->size_list >= 200)
 		return (2);
 	return (cub->size_list++, get_map(fd, map, status, cub));
 }
@@ -92,7 +92,8 @@ int	create_map_list(char *map_name, t_cub *cub)
 		print_error_exit("Error\nCouldn't open the map\n", cub);
 	map_list = NULL;
 	map = NULL;
-	if (get_map(fd, &map_list, &status, cub) != SUCCESS)
+	status = get_map(fd, &map_list, &status, cub);
+	if (status != SUCCESS)
 		return (ft_delete_list(&cub->map), close(fd), ERR_MALLOC);
 	close(fd);
 	if (status == 2)

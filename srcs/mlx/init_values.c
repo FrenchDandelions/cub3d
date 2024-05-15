@@ -68,6 +68,7 @@ static void	initialize_t_ray(t_cub *cub)
 void	init_and_calculate_ray(t_cub *cub)
 {
 	initialize_t_ray(cub);
+	initialize_minimap_values(cub);
 	calculate_ray(cub);
 }
 
