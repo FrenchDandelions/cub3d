@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 14:45:04 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/15 19:16:50 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/16 14:35:14 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,13 +41,13 @@ void	init_doors(t_cub *cub)
 	cub->img.doors[9] = init_img(cub, DOOR_NINE);
 	cub->img.doors[10] = init_img(cub, DOOR_TEN);
 	if (!cub->img.doors[0] || !cub->img.doors[1] || !cub->img.doors[2])
-		return (free_and_exit(cub));
+		return ((void)ft_dprintf(2, "%s\n", ERR_TEXTURE), free_and_exit(cub));
 	if (!cub->img.doors[3] || !cub->img.doors[4] || !cub->img.doors[5])
-		return (free_and_exit(cub));
+		return ((void)ft_dprintf(2, "%s\n", ERR_TEXTURE), free_and_exit(cub));
 	if (!cub->img.doors[6] || !cub->img.doors[7] || !cub->img.doors[8])
-		return (free_and_exit(cub));
+		return ((void)ft_dprintf(2, "%s\n", ERR_TEXTURE), free_and_exit(cub));
 	if (!cub->img.doors[9] || !cub->img.doors[10])
-		return (free_and_exit(cub));
+		return ((void)ft_dprintf(2, "%s\n", ERR_TEXTURE), free_and_exit(cub));
 	cub->img.curr_door = cub->img.doors[0];
 }
 
