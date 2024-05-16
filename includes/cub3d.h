@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:11:48 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 19:36:55 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/16 13:32:54 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@
 # define FAILURE 0
 # define ERR_MALLOC -2
 # define ERR_PARSING 2
+# define ERR_STACK 3
 # define MAP_ERR "Error\nThe map isn't properly formatted"
 # define ERR_CLR_F -7
 # define ERR_CLR_S -8

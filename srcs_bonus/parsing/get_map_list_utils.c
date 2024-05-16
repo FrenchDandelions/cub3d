@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/18 18:32:56 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 13:59:08 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/16 13:44:12 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,8 +36,10 @@ void	print_error_exit(char *err, t_cub *cub)
 
 int	list_to_map(t_map *map, t_cub *cub, char ***new_map, int i)
 {
-	if (!map)
+	if (!map && (*new_map))
 		return ((*new_map)[i] = NULL, SUCCESS);
+	if (!map && !(*new_map))
+		return (ERR_PARSING);
 	if (!*new_map)
 	{
 		*new_map = malloc(sizeof(char *) * (cub->size_list + 1));

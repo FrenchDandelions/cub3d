@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   add_mmap.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: thole <thole@student.42.fr>                +#+  +:+       +#+        */
+/*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/15 16:08:26 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 16:35:54 by thole            ###   ########.fr       */
+/*   Updated: 2024/05/16 13:37:26 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	set_color(t_cub *cub, char **buffer, int yx[2])
 
 static void	check_index(char c, t_cub *cub, size_t i, size_t j)
 {
-	if (c == ' ' || c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
+	if (c == '0' || c == 'N' || c == 'S' || c == 'E' || c == 'W')
 	{
 		cub->mmap.cl_pk = cub->mmap.color_floor;
 		set_color(cub, &(cub->img.buffer), (int [2]){i, j});

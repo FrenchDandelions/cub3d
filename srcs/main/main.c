@@ -6,11 +6,17 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/11 14:08:39 by thole             #+#    #+#             */
-/*   Updated: 2024/05/09 19:37:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/16 13:35:45 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/cub3d.h"
+
+static void	init_2(t_cub *cub)
+{
+	cub->size_list = 0;
+	cub->map = NULL;
+}
 
 static void	initialize_struct(t_cub *cub)
 {
@@ -38,6 +44,7 @@ static void	initialize_struct(t_cub *cub)
 	cub->pos.start_x = -1;
 	cub->pos.start_y = -1;
 	cub->status = 0;
+	init_2(cub);
 }
 
 void	free_all(t_cub *cub)
@@ -71,6 +78,9 @@ void	print_err(int err)
 	if (err == ERR_CLR_S)
 		ft_dprintf(STDERR_FILENO,
 			"Error\nThe sky color isn't properly formatted\n");
+	if (err == ERR_STACK)
+		ft_dprintf(STDERR_FILENO, "Error\nStack overflow averted, try smaller\n\
+		");
 }
 
 int	main(int argc, char **argv)

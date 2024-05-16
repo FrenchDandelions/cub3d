@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/17 15:58:09 by thole             #+#    #+#             */
-/*   Updated: 2024/05/07 13:50:46 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/16 13:39:19 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,8 +74,8 @@ int	get_map(int fd, t_map **map, int *status, t_cub *cub)
 		if (!(*map))
 			return (ERR_MALLOC);
 	}
-	if (cub->size_list >= 200)
-		return (2);
+	if (cub->size_list >= 1000 || ft_strlen((*map)->line) > 10000)
+		return (ERR_STACK);
 	return (cub->size_list++, get_map(fd, map, status, cub));
 }
 
@@ -94,13 +94,11 @@ int	create_map_list(char *map_name, t_cub *cub)
 	map = NULL;
 	status = get_map(fd, &map_list, &status, cub);
 	if (status != SUCCESS)
-		return (ft_delete_list(&cub->map), close(fd), ERR_MALLOC);
+		return (ft_delete_list(&cub->map), close(fd), status);
 	close(fd);
-	if (status == 2)
-		return (ft_delete_list(&cub->map), print_error_exit(MAP_ERR, cub), 2);
 	status = list_to_map(cub->map, cub, &map, 0);
 	if (status != SUCCESS)
-		return (ERR_MALLOC);
+		return (status);
 	cub->initial_map = map;
 	if (size_map(cub, map, 0) == ERR_MALLOC)
 		return (ft_free_tab(map), ERR_MALLOC);
