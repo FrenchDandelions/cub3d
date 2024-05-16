@@ -31,4 +31,9 @@ test_map maps_bonus/wrong_maps/wrongchar.cub
 test_map maps_bonus/wrong_maps/wrongextension.ber
 test_map maps_bonus/wrong_maps/wrongrgb.cub
 test_map maps_bonus/wrong_maps/wrongrgb2.cub
+test_map maps_bonus/wrong_maps/missingmap.cub
+chmod 000 maps_bonus/wrong_maps/missingperm.cub
+test_map maps_bonus/wrong_maps/missingperm.cub
+chmod 777 maps_bonus/wrong_maps/missingperm.cub
+test_map maps_bonus/wrong_maps/missingperm.cub
 

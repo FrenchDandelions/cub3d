@@ -30,4 +30,8 @@ test_map maps/wrong_maps/wrongchar.cub
 test_map maps/wrong_maps/wrongextension.ber
 test_map maps/wrong_maps/wrongrgb.cub
 test_map maps/wrong_maps/wrongrgb2.cub
+test_map maps/wrong_maps/missingmap.cub
+chmod 000 maps/wrong_maps/missingperm.cub
+test_map maps/wrong_maps/missingperm.cub
+chmod 777 maps/wrong_maps/missingperm.cub
 
