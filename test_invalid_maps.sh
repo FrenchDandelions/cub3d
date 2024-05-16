@@ -7,12 +7,11 @@ NC='\e[0m'
 function test_map(){
 	printf "${GREEN}Testing map: ${BLUE}$1${NC}\n"
 	echo '['
-	valgrind --quiet ./cub3D_bonus $1
+	valgrind --quiet ./cub3D $1
 	echo ']'
 }
 
-make fclean
-make bonus
+make re
 test_map maps/wrong_maps/doublecolor.cub
 test_map maps/wrong_maps/doubletexture.cub
 test_map maps/wrong_maps/empty.cub
