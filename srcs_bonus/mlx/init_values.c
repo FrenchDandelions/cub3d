@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 19:12:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/15 19:36:43 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/16 14:34:00 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,7 +88,7 @@ void	init_mlx(t_cub *cub)
 	cub->img.east = init_img(cub, cub->img.east_texture);
 	cub->img.west = init_img(cub, cub->img.west_texture);
 	if (!cub->img.north || !cub->img.south || !cub->img.east || !cub->img.west)
-		return (free_and_exit(cub));
+		return ((void)ft_dprintf(2, "%s\n", ERR_TEXTURE), free_and_exit(cub));
 	init_doors(cub);
 	initialize_t_ray(cub);
 	calculate_ray(cub);

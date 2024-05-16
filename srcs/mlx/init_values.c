@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/14 19:12:21 by acroue            #+#    #+#             */
-/*   Updated: 2024/05/15 19:36:08 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/16 14:30:40 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ void	init_mlx(t_cub *cub)
 	cub->img.west = mlx_xpm_file_to_image(cub->mlx_ptr, cub->img.west_texture,
 			&cub->img.width, &cub->img.height);
 	if (!cub->img.north || !cub->img.south || !cub->img.east || !cub->img.west)
-		return (free_and_exit(cub));
+		return ((void)ft_dprintf(2, "%s\n", ERR_TEXTURE), free_and_exit(cub));
 	init_and_calculate_ray(cub);
 	mlx_hook(cub->mlx_win, KeyPress, KeyPressMask, &handle_key, cub);
 	mlx_hook(cub->mlx_win, 17, 0, &handle_cross, cub);
