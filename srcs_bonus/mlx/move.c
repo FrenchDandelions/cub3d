@@ -6,7 +6,7 @@
 /*   By: acroue <acroue@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/09 16:57:40 by thole             #+#    #+#             */
-/*   Updated: 2024/05/15 19:12:08 by acroue           ###   ########.fr       */
+/*   Updated: 2024/05/16 14:52:15 by acroue           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 static int	is_air(char curr_tile)
 {
-	if (curr_tile == '1' || curr_tile == '2')
+	if (curr_tile == '1' || curr_tile == '2' || curr_tile == '4')
 		return (0);
 	return (1);
 }
