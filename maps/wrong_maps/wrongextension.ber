@@ -1,0 +1,14 @@
+NO ./assets/walls/j.xpm
+SO ./assets/walls/turquoise_brick.xpm
+WE ./assets/walls/j.xpm
+WE ./assets/walls/j.xpm
+EA ./assets/walls/default_texture.xpm
+
+F 255,255,255
+C 0,0,0
+
+111111111111111111111111111111111
+100000000011000000000000100001111
+1000E0000000000000000000000001111
+111101111111111111111111111111111
+   111
